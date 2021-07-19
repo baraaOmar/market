@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="css/tableStyle.css" />
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="import" href="./table.html">
+
+  <title>تنويرات الاقصى</title>
+</head>
+
+<body>
+
+
+  <nav class="navbar navbar-expand-lg navbar-light  sticky_nav">
+    <div class="container-fluid">
+  
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div style="justify-content: flex-end;" class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+  
+          <li class="nav-item">
+  
+            <div class="dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">الواردات</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href=".\imports.html">سجل المشتلايات</a>
+                <a class="dropdown-item" href=".\imports.html">ادخال مشتريات</a>
+                <a class="dropdown-item" href=".\imports.html">ادخال مرتجع مشتريات</a>
+  
+              </div>
+            </div>
+          </li>
+          <li class="nav-item">
+  
+            <div class="dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">المبيعات</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href=".\selling.html">ادخال حركة بيع</a>
+                <a class="dropdown-item" href=".\selling.html">سجل حركات البيع</a>
+  
+              </div>
+            </div>
+          </li>
+  
+         
+          <li class="nav-item">
+  
+            <div class="dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">مصروفات عامة</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href=".\expenses.html">سجل المصروفات</a>
+                <a class="dropdown-item" href=".\expenses.html">ادخال مصروفات</a>
+  
+              </div>
+            </div>
+          </li>
+          <li class="nav-item">
+  
+  
+          </li>
+          <li class="nav-item">
+  
+            <div class="dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">سجل الارباح</a>
+  
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href=".\index.php">الصفحة الرئيسية</a>
+  
+          </li>
+        </ul>
+  
+      </div>
+  
+    </div>
+  </nav>
+  <div style="height: 400px;margin-bottom: 100px;
+    overflow-y: hidden;background-attachment: scroll;background-size: cover;" class="container-fluid">
+    <img src="../images/background.jpg" class="img-fluid" alt="...">
+
+  </div>
+
+
+  <div id="goodsFatherDiv" class="container-fluid col-xl-8">
+    <div class="col-xl-12 right">
+      <h3>سجل المصروفات</h3>
+      <div style="overflow: scroll;
+      height: 400px;" class="table-wrap">
+        <table class="table">
+
+          <tr>
+            <th>الموظف</th>
+            <th>الوصف </th>
+            <th>السعر الكلي</th>
+
+            <th>المبلغ المدفوع</th>
+          
+            <th>التاريخ</th>
+            
+         
+
+
+
+          </tr>
+
+          <tbody id="expenses_table">
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+ 
+
+  <div
+  style="margin-top: 200px !important;background-color: #f5e3ae;box-shadow: 1px 1px 1px 1px; text-align: -webkit-center;padding: 10px;"
+  class="container-fluid col-xl-6">
+  <h3>اضافة مصاريف جديدة </h3>
+  <form>
+  
+
+    <div class="form-group row">
+      <div class="col-sm-8  ">
+        <input type="text" class="form-control" placeholder="التفاصيل" id="expenses_name">
+      </div>
+      <label for="expenses_name" class="col-sm-4 col-form-label">التفاصيل</label>
+
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-8  ">
+        <input type="datetime-local" class="form-control" placeholder="التاريخ" id="expenses_date">
+      </div>
+      <label for="goods_code" class="col-sm-4 col-form-label">التاريخ</label>
+
+    </div>
+   
+  
+    <div class="form-group row">
+      <div class="col-sm-8">
+        <input type="number" min="0" class="form-control" id="expenses_payed_price" placeholder="المبلغ المدفوع">
+      </div>
+      <label for="goods_payed_price" class="col-sm-4 col-form-label">المبلغ المدفوع</label>
+
+    </div>
+   
+    <div class="form-group row">
+      <div class="col-sm-8">
+        <input type="number" min="0" class="form-control" id="expenses_total" placeholder="المبلغ الكلي">
+      </div>
+      <label for="payed_order" class="col-sm-4 col-form-label">المبلغ الكلي</label>
+
+    </div>
+    <button  onclick="addExpenses()" type="button" class="btn btn-success btn_margion_bottom">اضافة </button>
+  </form>
+
+</div>
+
+  <script>
+
+
+
+
+  </script>
+ 
+<script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="./javaScript/expenses.js"></script>
+
+</body>
+
+</html>

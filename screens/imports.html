@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="css/tableStyle.css" />
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="import" href="./table.html">
+
+  <title>تنويرات الاقصى</title>
+</head>
+
+<nav class="navbar navbar-expand-lg navbar-light  sticky_nav">
+  <div class="container-fluid">
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div style="justify-content: flex-end;" class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        <li class="nav-item">
+
+          <div class="dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">الواردات</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href=".\imports.html">سجل المشتلايات</a>
+              <a class="dropdown-item" href=".\imports.html">ادخال مشتريات</a>
+              <a class="dropdown-item" href=".\imports.html">ادخال مرتجع مشتريات</a>
+
+            </div>
+          </div>
+        </li>
+        <li class="nav-item">
+
+          <div class="dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">المبيعات</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href=".\selling.html">ادخال حركة بيع</a>
+              <a class="dropdown-item" href=".\selling.html">سجل حركات البيع</a>
+
+            </div>
+          </div>
+        </li>
+
+       
+        <li class="nav-item">
+
+          <div class="dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">مصروفات عامة</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href=".\expenses.html">سجل المصروفات</a>
+              <a class="dropdown-item" href=".\expenses.html">ادخال مصروفات</a>
+
+            </div>
+          </div>
+        </li>
+        <li class="nav-item">
+
+
+        </li>
+        <li class="nav-item">
+
+          <div class="dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">سجل الارباح</a>
+
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href=".\index.php">الصفحة الرئيسية</a>
+
+        </li>
+      </ul>
+
+    </div>
+
+  </div>
+</nav>
+
+
+<h3>سجل المشتريات</h3>
+<div class="container-fluid col-xl-10">
+  <div class="row " style="text-align: -webkit-right;">
+    <div class="container-fluid col-sm-3">
+      <label for="goods_imports_select" class="col-sm-12 col-form-label">نوع الفاتورة</label>
+
+      <select onchange="getImportsFilteredTypes()" class="form-control" style="text-align-last: end;" aria-placeholder="نوع الفاتورة" name="types"
+        id="goods_imports_select">
+        <option value="1" >فاتورة مشتريات</option>
+        <option  value="2" >فاتورة مرتجع مشتريات</option>
+      </select>
+    </div>
+
+
+  </div>
+  <div class="row " style="text-align: -webkit-right;">
+    <div style="align-self: center;" class="container-fluid col-sm-3">
+      <button onclick="clear_fields()">مسح الحقول</button>
+    </div>
+    <div style="align-self: center;" class="container-fluid col-sm-3">
+      <button onclick="imports_between_dates()">عرض الواردات بين التاريخين</button>
+    </div>
+    <div class="container-fluid col-sm-3">
+      <label for="date_profits">تاريخ البداية </label>
+      <input type="datetime-local" class="form-control" id="date_start_imports" placeholder="رقم الطلبية">
+    </div>
+    <div class="container-fluid col-sm-3">
+      <label for="date_profits">تاريخ الانتهاء </label>
+      <input type="datetime-local" class="form-control" id="date_end_imports" placeholder="رقم الطلبية">
+    </div>
+
+  </div>
+</div>
+
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">اضافة دفعة</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        <form>
+          <div class="form-group row">
+            <div class="col-sm-8  ">
+              <input type="number" class="form-control" placeholder="المبلغ المدفوع" id="payment_import">
+            </div>
+            <label for="provider_name" class="col-sm-4 col-form-label">المبلغ المدفوع</label>
+
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-8  ">
+              <input type="datetime-local" class="form-control" placeholder="التاريخ" id="date_import">
+            </div>
+            <label for="provider_phone" class="col-sm-4 col-form-label">التاريخ</label>
+
+          </div>
+        </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+          <button id="add_payment_import"  type="button" onclick="addImportPaymants()" class="btn btn-primary">حفظ التغييرات</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div style="margin-bottom: 200px !important;height: 500px;" class="container-fluid  col-lg-10">
+
+
+
+
+
+  <div style="box-shadow: 1px 1px 1px 1px; margin: 20px;overflow-x: scroll !important;height: 400px;;">
+
+
+    <table class="table">
+
+      <tr>
+        <th>نوع الفاتورة</th>
+        <th>اسم الموظف</th>
+        <th>تاريخ الادخال</th>
+        <th>اسم المورد</th>
+        <th> السعر الكلي لكل الطلبية</th>
+
+        <th>رقم الطلبية</th>
+        <th>المبلغ المدفوع</th>
+        <th>المبلغ المتبقي</th>
+        <th>&nbsp;</th>
+
+      </tr>
+
+      <tbody id="import_table_category">
+
+
+      </tbody>
+    </table>
+
+
+  </div>
+
+</div>
+
+<div class="container-fluid  col-lg-6"
+  style="margin-bottom: 200px !important;text-align: center;background-color: #5cd4a066;height: 650px;">
+  <h3>اضافة واردات </h3>
+  <form>
+ 
+    <div style="justify-content: center;" class="form-group row">
+      <div class="col-sm-8 right_input">
+        <label for="imports_select_type" class="col-sm-4 col-form-label">نوع الفاتورة</label>
+
+        <select class="form-control" style="text-align-last: end;" aria-placeholder="نوع الفاتورة" name="types"
+          id="imports_select_type">
+          <option value="1" >فاتورة مشتريات</option>
+          <option  value="2" >فاتورة مرتجع مشتريات</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6 right_input">
+        <label for="order_import">رقم الطلبية</label>
+        <input type="text" class="form-control" id="order_import" placeholder="رقم الطلبية">
+      </div>
+      <div class="form-group col-md-6 right_input">
+        <label for="price_import">اجمالي مبلغ الفاتورة</label>
+        <input min="0" type="number" class="form-control" id="price_import" placeholder="سعر الجملة">
+      </div>
+    </div>
+
+    <div class="form-group  right_input">
+
+
+
+
+
+
+
+
+
+      <!-- Button trigger modal -->
+      <a href="" style="color: red;font-size: 12px;" data-toggle="modal" data-target="#exampleModalCenter">
+        اذا كان المورد غير موجود الرجاء انشاء حساب مورد
+      </a>
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">اضافة مورد</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+
+
+                <div class="form-group row">
+                  <div class="col-sm-8  ">
+                    <input type="text" class="form-control" placeholder="اسم المورد" id="provider_name">
+                  </div>
+                  <label for="provider_name" class="col-sm-4 col-form-label">اسم المورد</label>
+
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-8  ">
+                    <input type="text" class="form-control" placeholder="رقم الهاتف" id="provider_phone">
+                  </div>
+                  <label for="provider_phone" class="col-sm-4 col-form-label">رقم الهاتف</label>
+
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-sm-8">
+                    <input type="text"  class="form-control" id="provider_address" placeholder="العنوان">
+                  </div>
+                  <label for="provider_address" class="col-sm-4 col-form-label">العنوان</label>
+
+                </div>
+
+
+
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+              <button type="button" onclick="addProviders()" class="btn btn-primary">حفظ التغييرات</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+      <label for="customer_imports_select">اسم المورد</label>
+      <select class="form-control" style="text-align-last: end;" aria-placeholder="اسم المورد" name="types"
+        id="customer_imports_select">
+
+      </select>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6   right_input">
+        <label for="date_import_add">التاريخ</label>
+        <input type="datetime-local" class="form-control" id="date_import_add" placeholder="التاريخ">
+      </div>
+      <div class="form-group col-md-6   right_input">
+        <label for="payed_import">المبلغ المدفوع</label>
+        <input min="0" type="number" class="form-control" id="payed_import" placeholder="المبلغ المدفوع">
+      </div>
+
+    </div>
+
+    <button onclick="addImports()" type="button" class="btn btn-primary btn_margion_bottom">اضافة المشتريات</button>
+  </form>
+
+</div>
+
+
+
+
+<div
+  style="margin-bottom: 200px !important;background-color: #f5e3ae;box-shadow: 1px 1px 1px 1px; text-align: -webkit-center;padding: 10px;"
+  class="container-fluid col-xl-6">
+  <h3>اضافة بضاعة جديدة </h3>
+  <form>
+  
+    <div class="form-group row">
+      <div class="col-sm-8  ">
+        <select class="form-control" aria-placeholder="رقم الطلبية" name="types" id="goods_orders_select">
+
+
+        </select>
+      </div>
+      <label for="goods_orders_select" class="col-sm-4 col-form-label">اختار طلبية معينة لاضافة البضاعة اليها</label>
+
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-8  ">
+        <input type="text" class="form-control" placeholder="اسم القطعة" id="goods_name">
+      </div>
+      <label for="goods_name" class="col-sm-4 col-form-label">اسم القطعة</label>
+
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-8  ">
+        <input type="text" class="form-control" placeholder="باركود القطعة" id="goods_code">
+      </div>
+      <label for="goods_code" class="col-sm-4 col-form-label">باركود القطعة</label>
+
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-8">
+        <input type="number" min="0" class="form-control" id="goods_price" placeholder="سعر كل القطعة">
+      </div>
+      <label for="goods_price" class="col-sm-4 col-form-label">سعر كل قطعة</label>
+
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-8">
+        <input type="number" min="0" class="form-control" id="goods_payed_price" placeholder="سعر كل القطعة">
+      </div>
+      <label for="goods_payed_price" class="col-sm-4 col-form-label">سعر البيع لكل القطعة</label>
+
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-8">
+        <input onchange="totalPriceGoods()" min="0" type="number" class="form-control" id="goods_quantity"
+          placeholder="الكمية">
+      </div>
+      <label for="goods_quantity" class="col-sm-4 col-form-label">الكمية</label>
+
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-8">
+        <input type="number" min="0" class="form-control" id="goods_total" placeholder="المبلغ الكلي">
+      </div>
+      <label for="payed_order" class="col-sm-4 col-form-label">المبلغ الكلي</label>
+
+    </div>
+    <button onclick="addGoods()" type="button" class="btn btn-success btn_margion_bottom">اضافة القطعة</button>
+  </form>
+
+</div>
+
+<div
+  style="margin-bottom: 200px !important;padding: 20px;box-shadow: 1px 1px 1px 1px; text-align: -webkit-center;background-color: #87b7ea24;"
+  class="container-fluid col-xl-7">
+
+  <h3>اضافة مشتريات مرتجعة </h3>
+  <form>
+
+  
+
+
+    <button style="background-color: #17a2b8 !important;margin-bottom: 20px;" type="button" onclick="myFunction()"
+      class="btn btn-success"> اضافة عنصر جديد</button>
+    <div style="max-height: 250px;
+       overflow: scroll;">
+      <table id="myTable_back_import">
+        <tr style="background-color: #eef5fc;">
+          <td>
+
+            <input id="back_in_0" placeholder="نوع القطعة" required list="back_in_datalist0" />
+            <datalist id="back_in_datalist0">
+
+            </datalist>
+          </td>
+          <td> <input  type="number" min="0" class="form-control"
+              id="quantity_import_back0" placeholder="الكمية"></td>
+         </td>
+
+        </tr>
+
+      </table>
+    </div>
+
+
+
+    <div style="justify-content: center;" class="form-group row">
+    
+      <div class="col-sm-8 right_input">
+       
+        <select class="form-control" style="text-align-last: end;" aria-placeholder=" الفاتورة" name="types"
+          id="back_import_select_type">
+         
+        </select>
+      </div>
+      <label for="back_import_select_type" class="col-sm-4 col-form-label">اختر فاتورة</label>
+
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-8">
+        <input class="form-control" type="datetime-local" id="back_import_date" placeholder="التاريخ">
+      </div>
+      <label for="customer_name" class="col-sm-4 col-form-label"> التاريخ</label>
+
+    </div>
+
+    <button onclick="addBackImport()" type="button" class="btn btn-success">اضافة</button>
+
+  </form>
+
+
+
+
+</div>
+<script>
+   function myFunction() {
+    var table = document.getElementById("myTable_back_import");
+    var row = table.insertRow(0);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+  
+    var id = document.querySelector("#myTable_back_import > tbody").childElementCount;
+    --id;
+    cell1.innerHTML = '  <input id="back_in_' + id + '"  placeholder="نوع القطعة"   list="back_in_datalist0' + id + '" required  /> <datalist id="back_in_datalist0' + id + '" ></datalist>';
+
+    cell2.innerHTML = ' <input type="number" min="0" class="form-control" id="quantity_import_back' + id + '" placeholder="الكمية">';
+  
+    getGoods();
+  }
+</script>
+<script src="./javaScript/getProviders.js"></script>
+<script src="./javaScript/get_Imported_types.js"></script>
+<script src="./javaScript/addGoods.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+
+<body>
