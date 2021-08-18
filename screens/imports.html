@@ -2,10 +2,20 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
+  <meta meta="meta" charset="utf-8">
+
   <link rel="stylesheet" href="css/tableStyle.css" />
   <link rel="stylesheet" href="css/bootstrap.min.css" />
+
   <link rel="import" href="./table.html">
+  <!----->
+  <script src="js/jquery.min.js"></script>
+
+
+  <script rel="stylesheet" href="../node_modules/popper.js/dist/popper.min.js"></script>
+  <script src="js/popper.js"></script>
+
+  <link defer rel="stylesheet" href="../node_modules/bootstrap-select/dist/css/bootstrap-select.min.css" />
 
   <title>تنويرات الاقصى</title>
 </head>
@@ -44,7 +54,7 @@
           </div>
         </li>
 
-       
+
         <li class="nav-item">
 
           <div class="dropdown">
@@ -85,72 +95,276 @@
     <div class="container-fluid col-sm-3">
       <label for="goods_imports_select" class="col-sm-12 col-form-label">نوع الفاتورة</label>
 
-      <select onchange="getImportsFilteredTypes()" class="form-control" style="text-align-last: end;" aria-placeholder="نوع الفاتورة" name="types"
-        id="goods_imports_select">
-        <option value="1" >فاتورة مشتريات</option>
-        <option  value="2" >فاتورة مرتجع مشتريات</option>
+      <select onchange="getImportsFilteredTypes()" class="form-control select_style" style="text-align-last: end;"
+        aria-placeholder="نوع الفاتورة" name="types" id="goods_imports_select">
+        <option value="1">فاتورة مشتريات</option>
+        <option value="2">فاتورة مرتجع مشتريات</option>
       </select>
     </div>
 
 
   </div>
   <div class="row " style="text-align: -webkit-right;">
-    <div style="align-self: center;" class="container-fluid col-sm-3">
-      <button onclick="clear_fields()">مسح الحقول</button>
+    <div style="align-self: center;" class="container-fluid col-sm-3 ">
+      <button class="button_style" onclick="clear_fields()">مسح الحقول</button>
     </div>
     <div style="align-self: center;" class="container-fluid col-sm-3">
-      <button onclick="imports_between_dates()">عرض الواردات بين التاريخين</button>
+      <button class="button_style" onclick="imports_between_dates()">عرض الواردات بين التاريخين</button>
     </div>
-    <div class="container-fluid col-sm-3">
-      <label for="date_profits">تاريخ البداية </label>
-      <input type="datetime-local" class="form-control" id="date_start_imports" placeholder="رقم الطلبية">
-    </div>
+  
     <div class="container-fluid col-sm-3">
       <label for="date_profits">تاريخ الانتهاء </label>
-      <input type="datetime-local" class="form-control" id="date_end_imports" placeholder="رقم الطلبية">
+      <input type="date" class="form-control" id="date_end_imports" placeholder="رقم الطلبية">
     </div>
 
+    <div class="container-fluid col-sm-3">
+      <label for="date_profits">تاريخ البداية </label>
+      <input type="date" class="form-control" id="date_start_imports" placeholder="رقم الطلبية">
+    </div>
   </div>
 </div>
 
-
-
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">اضافة دفعة</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
+<!---  CHASH Modal PAYMENT  ---->
+<div class="modal fade" id="cashModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">  اضافة دفعة كاش</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
         <form>
           <div class="form-group row">
+          
+            <div class="col-sm-8 right_input">
+            
+              <select class="form-control" style="text-align-last: end;" aria-placeholder="نوع العملة" name="types"
+                id="cash_coin_type">
+                <option value="1">دولار</option>
+                <option value="2">دينار</option>
+              </select>
+            </div>
+            <label for="cash_coin_type" class="col-sm-4 col-form-label">نوع العملة</label>
+      
+      </div>
+          <div class="form-group row">
             <div class="col-sm-8  ">
-              <input type="number" class="form-control" placeholder="المبلغ المدفوع" id="payment_import">
+              <input type="number" class="form-control" placeholder="المبلغ المدفوع" id="payment_cash">
             </div>
             <label for="provider_name" class="col-sm-4 col-form-label">المبلغ المدفوع</label>
 
           </div>
           <div class="form-group row">
             <div class="col-sm-8  ">
-              <input type="datetime-local" class="form-control" placeholder="التاريخ" id="date_import">
+              <input type="datetime-local" class="form-control" placeholder="التاريخ" id="date_cash">
             </div>
             <label for="provider_phone" class="col-sm-4 col-form-label">التاريخ</label>
 
           </div>
         </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
-          <button id="add_payment_import"  type="button" onclick="addImportPaymants()" class="btn btn-primary">حفظ التغييرات</button>
-        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+        <button id="add_payment_cash" type="button" onclick="addImportPaymants()" class="btn btn-primary">حفظ
+          التغييرات</button>
       </div>
     </div>
   </div>
+</div>
+
+
+
+ <!---cheque Modal PAYMENT  --->
+ <div class="modal fade" id="chequeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">  اضافة دفعة شيك</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group row">
+          
+            <div class="col-sm-8 right_input">
+            
+              <select class="form-control" style="text-align-last: end;" aria-placeholder="نوع العملة" name="types"
+                id="cheque_coin_type">
+                <option value="1">دولار</option>
+                <option value="2">دينار</option>
+              </select>
+            </div>
+            <label for="cheque_coin_type" class="col-sm-4 col-form-label">نوع العملة</label>
+      
+      </div>
+          <div class="form-group row">
+            <div class="col-sm-8  ">
+              <input type="number" class="form-control" placeholder="المبلغ المدفوع" id="payment_cheque">
+            </div>
+            <label for="provider_name" class="col-sm-4 col-form-label">المبلغ المدفوع</label>
+
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-8  ">
+              <input type="number" class="form-control" placeholder="من " id="cheque_from">
+            </div>
+            <label for="provider_name" class="col-sm-4 col-form-label">من </label>
+
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-8  ">
+              <input type="datetime-local" class="form-control" placeholder="مدفوع الى" id="cheque_to">
+            </div>
+            <label for="provider_phone" class="col-sm-4 col-form-label">مدفوع الى</label>
+
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-8  ">
+              <input type="datetime-local" class="form-control" placeholder="التاريخ" id="cheque_date">
+            </div>
+            <label for="provider_phone" class="col-sm-4 col-form-label">تاريخ دفع الشيك</label>
+
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-8  ">
+              <input type="datetime-local" class="form-control" placeholder="تاريخ الاستحقاق" id="cheque_due_date">
+            </div>
+            <label for="provider_phone" class="col-sm-4 col-form-label">تاريخ الاستحقاق</label>
+
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+        <button id="add_payment_cheque" type="button" onclick="addImportPaymants()" class="btn btn-primary">حفظ
+          التغييرات</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--  BANK Modal PAYMENT -->
+<div class="modal fade" id="bankModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">  اضافة دفعة بنك</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group row">
+          
+          <div class="col-sm-8 right_input">
+          
+            <select class="form-control" style="text-align-last: end;" aria-placeholder="نوع العملة" name="types"
+              id="bank_coin_type">
+              <option value="1">دولار</option>
+              <option value="2">دينار</option>
+            </select>
+          </div>
+          <label for="bank_coin_type" class="col-sm-4 col-form-label">نوع العملة</label>
+    
+    </div>
+          <div class="form-group row">
+            <div class="col-sm-8  ">
+              <input type="number" class="form-control" placeholder="المبلغ المدفوع" id="bank_pay">
+            </div>
+            <label for="provider_name" class="col-sm-4 col-form-label">المبلغ المدفوع</label>
+
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-8  ">
+              <input  class="form-control" placeholder="حساب المرسل" id="bank_pay_from">
+            </div>
+            <label for="provider_name" class="col-sm-4 col-form-label">من حساب </label>
+
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-8  ">
+              <input  class="form-control" placeholder="حساب المستقبل" id="bank_pay_to">
+            </div>
+            <label for="provider_phone" class="col-sm-4 col-form-label">مدفوع الى حساب</label>
+
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-8  ">
+              <input type="datetime-local" class="form-control" placeholder="التاريخ" id="date_bank_pay">
+            </div>
+            <label for="provider_phone" class="col-sm-4 col-form-label">تاريخ الدفعة</label>
+
+          </div>
+         
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+        <button id="add_payment_bank" type="button" onclick="addImportPaymants()" class="btn btn-primary">حفظ
+          التغييرات</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Modal add provider -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">اضافة مورد</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+
+
+          <div class="form-group row">
+            <div class="col-sm-8  ">
+              <input type="text" class="form-control" placeholder="اسم المورد" id="provider_name">
+            </div>
+            <label for="provider_name" class="col-sm-4 col-form-label">اسم المورد</label>
+
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-8  ">
+              <input type="text" class="form-control" placeholder="رقم الهاتف" id="provider_phone">
+            </div>
+            <label for="provider_phone" class="col-sm-4 col-form-label">رقم الهاتف</label>
+
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="provider_address" placeholder="العنوان">
+            </div>
+            <label for="provider_address" class="col-sm-4 col-form-label">العنوان</label>
+
+          </div>
+
+
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+        <button type="button" onclick="addProviders()" class="btn btn-primary">حفظ التغييرات</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <div style="margin-bottom: 200px !important;height: 500px;" class="container-fluid  col-lg-10">
 
@@ -173,7 +387,7 @@
         <th>رقم الطلبية</th>
         <th>المبلغ المدفوع</th>
         <th>المبلغ المتبقي</th>
-        <th>&nbsp;</th>
+        <th> اضافة دفعة </th>
 
       </tr>
 
@@ -188,22 +402,25 @@
 
 </div>
 
-<div class="container-fluid  col-lg-6"
-  style="margin-bottom: 200px !important;text-align: center;background-color: #5cd4a066;height: 650px;">
-  <h3>اضافة واردات </h3>
+<div class="container-fluid  col-lg-8"
+  style="margin-bottom: 200px !important;text-align: center;background-color: #5cd4a066;height: 650px;padding: 40px;">
+  <h3>اضافة مشتريات </h3>
   <form>
- 
+
     <div style="justify-content: center;" class="form-group row">
-      <div class="col-sm-8 right_input">
+      <div class="col-md-6 right_input">
         <label for="imports_select_type" class="col-sm-4 col-form-label">نوع الفاتورة</label>
 
         <select class="form-control" style="text-align-last: end;" aria-placeholder="نوع الفاتورة" name="types"
           id="imports_select_type">
-          <option value="1" >فاتورة مشتريات</option>
-          <option  value="2" >فاتورة مرتجع مشتريات</option>
+          <option value="1">فاتورة مشتريات</option>
+          <option value="2">فاتورة مرتجع مشتريات</option>
         </select>
       </div>
-
+      <div class="form-group col-md-6   right_input">
+        <label for="date_import_add">التاريخ</label>
+        <input type="datetime-local" class="form-control" id="date_import_add" placeholder="التاريخ">
+      </div>
     </div>
 
     <div class="form-row">
@@ -213,84 +430,17 @@
       </div>
       <div class="form-group col-md-6 right_input">
         <label for="price_import">اجمالي مبلغ الفاتورة</label>
-        <input min="0" type="number" class="form-control" id="price_import" placeholder="سعر الجملة">
+        <input type="number" min="0" class="form-control" id="price_import" placeholder="سعر الجملة">
       </div>
     </div>
 
     <div class="form-group  right_input">
 
 
-
-
-
-
-
-
-
       <!-- Button trigger modal -->
-      <a href="" style="color: red;font-size: 12px;" data-toggle="modal" data-target="#exampleModalCenter">
-        اذا كان المورد غير موجود الرجاء انشاء حساب مورد
+      <a class="add_btn_style" href="" style="font-size: 12px;" data-toggle="modal" data-target="#exampleModalCenter">
+          حساب مورد +
       </a>
-
-      <!-- Modal -->
-      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">اضافة مورد</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form>
-
-
-                <div class="form-group row">
-                  <div class="col-sm-8  ">
-                    <input type="text" class="form-control" placeholder="اسم المورد" id="provider_name">
-                  </div>
-                  <label for="provider_name" class="col-sm-4 col-form-label">اسم المورد</label>
-
-                </div>
-                <div class="form-group row">
-                  <div class="col-sm-8  ">
-                    <input type="text" class="form-control" placeholder="رقم الهاتف" id="provider_phone">
-                  </div>
-                  <label for="provider_phone" class="col-sm-4 col-form-label">رقم الهاتف</label>
-
-                </div>
-
-                <div class="form-group row">
-                  <div class="col-sm-8">
-                    <input type="text"  class="form-control" id="provider_address" placeholder="العنوان">
-                  </div>
-                  <label for="provider_address" class="col-sm-4 col-form-label">العنوان</label>
-
-                </div>
-
-
-
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
-              <button type="button" onclick="addProviders()" class="btn btn-primary">حفظ التغييرات</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-
-
-
-
-
-
-
-
 
 
       <label for="customer_imports_select">اسم المورد</label>
@@ -300,35 +450,46 @@
       </select>
     </div>
 
+    
     <div class="form-row">
       <div class="form-group col-md-6   right_input">
-        <label for="date_import_add">التاريخ</label>
-        <input type="datetime-local" class="form-control" id="date_import_add" placeholder="التاريخ">
+        <button onclick="addImports()" type="button" class="btn btn-primary btn_margion_bottom">تثبيت طلبية المشتريات</button>
       </div>
       <div class="form-group col-md-6   right_input">
-        <label for="payed_import">المبلغ المدفوع</label>
-        <input min="0" type="number" class="form-control" id="payed_import" placeholder="المبلغ المدفوع">
+        <button onclick="paymentSelect()" type="button" class="btn btn-primary btn_margion_bottom">  تثبيت طلبية المشتريات وسجل دفعة </button>
+     
+        <div id="pay_type_select_div" style="text-align-last: center;display: none;
+        align-self: center;" class="dropdown  form-group col-md-6   right_input">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           طريقة الدفع
+          </button>
+          <div id="pay_type_select" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a onclick="document.getElementById('add_payment_bank').value=id" class="dropdown-item" data-toggle="modal" data-target="#bankModal">تحويل بنك</a>
+            <a onclick="document.getElementById('add_payment_cheque').value=id" class="dropdown-item" data-toggle="modal" data-target="#chequeModal" >شيكات</a>
+            <a onclick="document.getElementById('add_payment_cash').value=id" class="dropdown-item" data-toggle="modal" data-target="#cashModal">كاش</a>
+          </div>
+        </div>
+     
       </div>
-
-    </div>
-
-    <button onclick="addImports()" type="button" class="btn btn-primary btn_margion_bottom">اضافة المشتريات</button>
-  </form>
+      </div>
+    </form>
 
 </div>
 
 
 
-
+<!--add new goods-->
 <div
   style="margin-bottom: 200px !important;background-color: #f5e3ae;box-shadow: 1px 1px 1px 1px; text-align: -webkit-center;padding: 10px;"
   class="container-fluid col-xl-6">
   <h3>اضافة بضاعة جديدة </h3>
   <form>
-  
+
     <div class="form-group row">
       <div class="col-sm-8  ">
-        <select class="form-control" aria-placeholder="رقم الطلبية" name="types" id="goods_orders_select">
+
+        <select data-container="body" data-live-search="true" data-live-search-style="startsWith"
+          class=" selectpicker form-control" aria-placeholder="رقم الطلبية" name="types" id="goods_orders_select">
 
 
         </select>
@@ -376,7 +537,7 @@
     </div>
     <div class="form-group row">
       <div class="col-sm-8">
-        <input type="number" min="0" class="form-control" id="goods_total" placeholder="المبلغ الكلي">
+        <input  type="number" min="0" class="form-control" id="goods_total" placeholder="المبلغ الكلي">
       </div>
       <label for="payed_order" class="col-sm-4 col-form-label">المبلغ الكلي</label>
 
@@ -393,25 +554,25 @@
   <h3>اضافة مشتريات مرتجعة </h3>
   <form>
 
-  
+
 
 
     <button style="background-color: #17a2b8 !important;margin-bottom: 20px;" type="button" onclick="myFunction()"
       class="btn btn-success"> اضافة عنصر جديد</button>
-    <div style="max-height: 250px;
+    <div style="max-height: 250px;margin-bottom: 50px;
        overflow: scroll;">
       <table id="myTable_back_import">
         <tr style="background-color: #eef5fc;">
           <td>
+            <select id="back_in_0" placeholder="نوع القطعة" data-container="body" data-live-search="true"
+              data-live-search-style="startsWith" class=" selectpicker " name="types">
 
-            <input id="back_in_0" placeholder="نوع القطعة" required list="back_in_datalist0" />
-            <datalist id="back_in_datalist0">
 
-            </datalist>
+            </select>
+
           </td>
-          <td> <input  type="number" min="0" class="form-control"
-              id="quantity_import_back0" placeholder="الكمية"></td>
-         </td>
+          <td> <input type="number" min="0" class="form-control" id="quantity_import_back0" placeholder="الكمية"></td>
+          </td>
 
         </tr>
 
@@ -421,12 +582,13 @@
 
 
     <div style="justify-content: center;" class="form-group row">
-    
+
       <div class="col-sm-8 right_input">
-       
-        <select class="form-control" style="text-align-last: end;" aria-placeholder=" الفاتورة" name="types"
+
+        <select data-container="body" class="selectpicker  form-control" data-live-search="true"
+          data-live-search-style="startsWith" style="text-align-last: end;" aria-placeholder=" الفاتورة" name="types"
           id="back_import_select_type">
-         
+
         </select>
       </div>
       <label for="back_import_select_type" class="col-sm-4 col-form-label">اختر فاتورة</label>
@@ -449,26 +611,39 @@
 
 </div>
 <script>
-   function myFunction() {
+  function myFunction() {
     var table = document.getElementById("myTable_back_import");
     var row = table.insertRow(0);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
-  
+
     var id = document.querySelector("#myTable_back_import > tbody").childElementCount;
     --id;
-    cell1.innerHTML = '  <input id="back_in_' + id + '"  placeholder="نوع القطعة"   list="back_in_datalist0' + id + '" required  /> <datalist id="back_in_datalist0' + id + '" ></datalist>';
+    cell1.innerHTML   ='  <select id="back_in_' + id + '" placeholder="نوع القطعة" data-container="body" data-live-search="true"    data-live-search-style="startsWith" class=" selectpicker " name="types">  </select>';
+    // '  <input id="back_in_' + id + '"  placeholder="نوع القطعة"   list="back_in_datalist0' + id + '" required  /> <datalist id="back_in_datalist0' + id + '" ></datalist>';
 
     cell2.innerHTML = ' <input type="number" min="0" class="form-control" id="quantity_import_back' + id + '" placeholder="الكمية">';
-  
+
     getGoods();
   }
 </script>
 <script src="./javaScript/getProviders.js"></script>
 <script src="./javaScript/get_Imported_types.js"></script>
 <script src="./javaScript/addGoods.js"></script>
+
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/popper.js"></script>
+
+
+<script src="../node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+<script>
+  function paymentSelect(){
+    document.getElementById("pay_type_select_div").style.display="inline-block";
+  }
+</script>
+
 
 
 <body>

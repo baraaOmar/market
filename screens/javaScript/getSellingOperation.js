@@ -21,13 +21,13 @@ var i=0;
         while(myjson[i].name!=null) {
      if(!danger_quantity)
     { if(myjson[i].quantity<10)
-          html = ' <tr role="alert"> <td>'+myjson[i].quentity_paied+'</td> <td>'+myjson[i].quantity+'</td> <td>'+myjson[i].price_paied+'</td> <td>'+myjson[i].price+'</td> <td>'+myjson[i].Par_code+'</td> <td>'+myjson[i].name+'</td> <td><img style="width: 30px;" src="../images/danger.png" alt=""></td> <td> <input  type="checkbox" data-toggle="modal" onclick="rapish(\''+myjson[i].id  + '\',\''+myjson[i].name  + '\')"  data-target="#exampleModal_rapish">  </input></td>   </tr>'; 
+          html = ' <tr role="alert"> <td>'+myjson[i].quentity_remained+'</td> <td>'+myjson[i].quentity_paied+'</td> <td>'+myjson[i].quantity+'</td> <td>'+myjson[i].price_paied+'</td> <td>'+myjson[i].price+'</td> <td>'+myjson[i].Par_code+'</td> <td>'+myjson[i].name+'</td> <td><img style="width: 20px;" src="../images/danger.png" alt=""></td> <td> <input  type="checkbox" data-toggle="modal" onclick="rapish(\''+myjson[i].id  + '\',\''+myjson[i].name  + '\')"  data-target="#exampleModal_rapish">  </input></td>   </tr>'; 
      else{
-      html = ' <tr role="alert">  <td>'+myjson[i].quentity_paied+'</td> <td>'+myjson[i].quantity+'</td> <td>'+myjson[i].price_paied+'</td> <td>'+myjson[i].price+'</td> <td>'+myjson[i].Par_code+'</td> <td>'+myjson[i].name+'</td> <td> <input  type="checkbox" data-toggle="modal" onclick="rapish(\''+myjson[i].id  + '\',\''+myjson[i].name  + '\')"  data-target="#exampleModal_rapish">  </input></td>   </tr>'; 
+      html = ' <tr role="alert"> <td>'+myjson[i].quentity_remained+'</td> <td>'+myjson[i].quentity_paied+'</td> <td>'+myjson[i].quantity+'</td> <td>'+myjson[i].price_paied+'</td> <td>'+myjson[i].price+'</td> <td>'+myjson[i].Par_code+'</td> <td>'+myjson[i].name+'</td> <td> <input  type="checkbox" data-toggle="modal" onclick="rapish(\''+myjson[i].id  + '\',\''+myjson[i].name  + '\')"  data-target="#exampleModal_rapish">  </input></td>   </tr>'; 
      
      }  }  
      else{
-      html = ' <tr role="alert"> <td>'+myjson[i].quentity_paied+'</td> <td>'+myjson[i].quantity+'</td> <td>'+myjson[i].price_paied+'</td> <td>'+myjson[i].price+'</td> <td>'+myjson[i].Par_code+'</td> <td>'+myjson[i].name+'</td> <td><img style="width: 30px;" src="../images/danger.png" alt=""></td> <td> <input  type="checkbox" data-toggle="modal" onclick="rapish(\''+myjson[i].id  + '\',\''+myjson[i].name  + '\')"  data-target="#exampleModal_rapish">  </input></td>   </tr>'; 
+      html = ' <tr role="alert"> <td>'+myjson[i].quentity_remained+'</td> <td>'+myjson[i].quentity_paied+'</td> <td>'+myjson[i].quantity+'</td> <td>'+myjson[i].price_paied+'</td> <td>'+myjson[i].price+'</td> <td>'+myjson[i].Par_code+'</td> <td>'+myjson[i].name+'</td> <td><img style="width: 20px;" src="../images/danger.png" alt=""></td> <td> <input  type="checkbox" data-toggle="modal" onclick="rapish(\''+myjson[i].id  + '\',\''+myjson[i].name  + '\')"  data-target="#exampleModal_rapish">  </input></td>   </tr>'; 
     
      }
            document.getElementById("selling_operation_table").innerHTML += html;
@@ -116,13 +116,13 @@ document.getElementById("selling_operation_table").innerHTML="";
         while(myjson[i].name!=null) {
           if(!danger_quantity)
          { if(myjson[i].quantity<10)
-               html = ' <tr role="alert"> <td>'+myjson[i].quentity_paied+'</td> <td>'+myjson[i].quantity+'</td> <td>'+myjson[i].price_paied+'</td> <td>'+myjson[i].price+'</td> <td>'+myjson[i].Par_code+'</td> <td>'+myjson[i].name+'</td> <td><img style="width: 30px;" src="../images/danger.png" alt=""></td> </tr>';
+               html = ' <tr role="alert"> <td>'+myjson[i].quentity_remained+'</td> <td>'+myjson[i].quentity_paied+'</td> <td>'+myjson[i].quantity+'</td> <td>'+myjson[i].price_paied+'</td> <td>'+myjson[i].price+'</td> <td>'+myjson[i].Par_code+'</td> <td>'+myjson[i].name+'</td> <td><img style="width: 30px;" src="../images/danger.png" alt=""></td> </tr>';
           else{
-           html = ' <tr role="alert">  <td>'+myjson[i].quentity_paied+'</td> <td>'+myjson[i].quantity+'</td> <td>'+myjson[i].price_paied+'</td> <td>'+myjson[i].price+'</td> <td>'+myjson[i].Par_code+'</td> <td>'+myjson[i].name+'</td> </tr>';
+           html = ' <tr role="alert"> <td>'+myjson[i].quentity_remained+'</td> <td>'+myjson[i].quentity_paied+'</td> <td>'+myjson[i].quantity+'</td> <td>'+myjson[i].price_paied+'</td> <td>'+myjson[i].price+'</td> <td>'+myjson[i].Par_code+'</td> <td>'+myjson[i].name+'</td> </tr>';
           
           }  }  
           else{
-           html = ' <tr role="alert"> <td>'+myjson[i].quentity_paied+'</td> <td>'+myjson[i].quantity+'</td> <td>'+myjson[i].price_paied+'</td> <td>'+myjson[i].price+'</td> <td>'+myjson[i].Par_code+'</td> <td>'+myjson[i].name+'</td> <td><img style="width: 30px;" src="../images/danger.png" alt=""></td> </tr>';
+           html = ' <tr role="alert"> <td>'+myjson[i].quentity_remained+'</td> <td>'+myjson[i].quentity_paied+'</td> <td>'+myjson[i].quantity+'</td> <td>'+myjson[i].price_paied+'</td> <td>'+myjson[i].price+'</td> <td>'+myjson[i].Par_code+'</td> <td>'+myjson[i].name+'</td> <td><img style="width: 30px;" src="../images/danger.png" alt=""></td> </tr>';
          
           }
                 document.getElementById("selling_operation_table").innerHTML += html;

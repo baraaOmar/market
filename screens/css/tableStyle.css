@@ -2,6 +2,10 @@ th{
     padding: 10px !important;
     text-align: center !important;
 }
+tr{
+  vertical-align: baseline;
+  vertical-align: middle;
+}
 td{
   
     color :black !important;
@@ -159,12 +163,40 @@ option{
     border-radius: 50%;
   }
   .sticky_nav{
-   /* position: sticky !important; */
-    top: 0px !important;
-  
+    position: sticky !important;
+    top: 0 !important;
+    background-color: #2ddab6;
+    z-index: 1000000000000000;
+    margin-bottom: 100px !important;
   }
   tbody:nth-child(1)>tr:nth-child(1){
     position: sticky !important;
     top: 0px !important;
     background-color: #2ddab6;
+  }
+  #myTable > tbody > tr:nth-child(1){
+    background-color: transparent !important;
+  }#myTable_back_import > tbody > tr:nth-child(1){
+    background-color: transparent !important;
+  }
+  .button_style{
+    border-radius: 6px;
+    border: none;
+    background-color: khaki;
+    padding: 5px;
+  }
+  .bootstrap-select{
+    margin-bottom: 20px !important;
+    background-color: white !important;
+  }
+  .add_btn_style{
+    color: #f8f9fa;
+    font-size: 12px;
+    background-color: green;
+    padding: 3px;
+    margin: 20px;
+    border-radius: 4px;
+  }
+  .btn-light{
+background-color: white !important;
   }

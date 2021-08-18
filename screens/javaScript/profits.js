@@ -1,14 +1,17 @@
 
-getProfitsImports();
-getProfitsExpenses();
-getProfitsSelling();
+
 function getProfitsSelling() {
     var i = 0;
     var html;
     var myjson;
     var date = document.getElementById("date_profits");
+    var date_end = document.getElementById("date_profits_end");
+    d1=new Date(date.value);
+    d2=new Date(date_end.value);
+   
     var formdata = new FormData();
-    formdata.append("date", date.value);
+    formdata.append("date_start", date.value);
+    formdata.append("date_end", date_end.value);
     if (window.XMLHttpRequest) {//start ajax code
         ajax = new XMLHttpRequest();
     } else {
@@ -18,8 +21,11 @@ function getProfitsSelling() {
     ajax.onreadystatechange = function () {
 
         if (this.readyState == 4 && this.status == 200) {
-            if (this.responseText !== "no data found" &&this.responseText !=null) {
+            if (this.responseText !== "no data found" && this.responseText != null) {
+               
+                
                 myjson = JSON.parse(this.responseText);
+             
                 if (myjson[0].selling_day != null) {
 
                     document.getElementById("profits_selling_day").value = myjson[0].selling_day;
@@ -29,13 +35,18 @@ function getProfitsSelling() {
 
                     document.getElementById("profits_debt_selling").value = myjson[0].debt_selling;
 
+ }
+                if (myjson[0].profits != null) {
+
+                    document.getElementById("profits").value = myjson[0].profits;
+
 
 
                 }
             }
         }
     }
-    ajax.open("POST", "./phpDB/profit.php?date=", true);
+    ajax.open("POST", "./phpDB/profit.php", true);
     ajax.send(formdata);
 
 }
@@ -44,8 +55,13 @@ function getProfitsImports() {
     var html;
     var myjson;
     var date = document.getElementById("date_profits");
-    var formdata = new FormData();
-    formdata.append("date", date.value);
+    var date_end = document.getElementById("date_profits_end");
+    d1=new Date(date.value);
+    d2=new Date(date_end.value);
+   
+        var formdata = new FormData();
+    formdata.append("date_start", date.value);
+    formdata.append("date_end", date_end.value);
     if (window.XMLHttpRequest) {//start ajax code
         ajax = new XMLHttpRequest();
     } else {
@@ -55,35 +71,41 @@ function getProfitsImports() {
     ajax.onreadystatechange = function () {
 
         if (this.readyState == 4 && this.status == 200) {
-            if (this.responseText !== "no data found" &&this.responseText !=null) {
+
+            if (this.responseText !== "no data found" && this.responseText != null) {
                 myjson = JSON.parse(this.responseText);
 
                 if (myjson[0].selling_day != null) {
 
                     document.getElementById("imports_selling_day").value = myjson[0].selling_day;
-                    i++;
+
                 }
                 if (myjson[0].debt_selling != null) {
 
                     document.getElementById("imports_debt_selling").value = myjson[0].debt_selling;
-                    i++;
+
 
 
                 }
             }
         }
     }
-    ajax.open("POST", "./phpDB/imports_profit.php?date=", true);
+    ajax.open("POST", "./phpDB/imports_profit.php", true);
     ajax.send(formdata);
-
+    
 }
 function getProfitsExpenses() {
     var i = 0;
     var html;
     var myjson;
     var date = document.getElementById("date_profits");
+    var date_end = document.getElementById("date_profits_end");
+    d1=new Date(date.value);
+    d2=new Date(date_end.value);
+  
     var formdata = new FormData();
-    formdata.append("date", date.value);
+    formdata.append("date_start", date.value);
+    formdata.append("date_end", date_end.value);
     if (window.XMLHttpRequest) {//start ajax code
         ajax = new XMLHttpRequest();
     } else {
@@ -93,7 +115,7 @@ function getProfitsExpenses() {
     ajax.onreadystatechange = function () {
 
         if (this.readyState == 4 && this.status == 200) {
-            if (this.responseText !== "no data found" &&this.responseText !==null) {
+            if (this.responseText !== "no data found" && this.responseText !== null) {
                 myjson = JSON.parse(this.responseText);
 
                 if (myjson[0].selling_day != null) {
@@ -111,17 +133,22 @@ function getProfitsExpenses() {
             }
         }
     }
-    ajax.open("POST", "./phpDB/expensesProfit.php?date=" , true);
+    ajax.open("POST", "./phpDB/expensesProfit.php?date=", true);
     ajax.send(formdata);
-
+    
 }
 function getProfitsImportsBack() {
     var i = 0;
     var html;
     var myjson;
     var date = document.getElementById("date_profits");
+    var date_end = document.getElementById("date_profits_end");
+    d1=new Date(date.value);
+    d2=new Date(date_end.value);
+  
     var formdata = new FormData();
-    formdata.append("date", date.value);
+    formdata.append("date_start", date.value);
+    formdata.append("date_end", date_end.value);
     if (window.XMLHttpRequest) {//start ajax code
         ajax = new XMLHttpRequest();
     } else {
@@ -131,7 +158,7 @@ function getProfitsImportsBack() {
     ajax.onreadystatechange = function () {
 
         if (this.readyState == 4 && this.status == 200) {
-            if (this.responseText !== "no data found" &&this.responseText !=null) {
+            if (this.responseText !== "no data found" && this.responseText != null) {
                 myjson = JSON.parse(this.responseText);
 
                 if (myjson[0].total != null) {
@@ -158,5 +185,42 @@ function getProfitsImportsBack() {
     }
     ajax.open("POST", "./phpDB/import_profitBack.php", true);
     ajax.send(formdata);
+    
+}
+function clearProfitsFields() {
+    //selling
+    document.getElementById("profits_selling_day").value = 0;
+    document.getElementById("profits_debt_selling").value = 0;
+    //imports
+    document.getElementById("imports_selling_day").value = 0;
+    document.getElementById("imports_debt_selling").value = 0;
+    //expenses
+    document.getElementById("expenses_selling_day").value = 0;
+    document.getElementById("expenses_debt_selling").value = 0;
+    //back
+    document.getElementById("back_import_total").value = 0;
+    document.getElementById("back_import_dept").value = 0;
+    document.getElementById("expenses_selling_payed").value = 0;
+
 
 }
+function getProfits(){
+    clearProfitsFields();
+   
+    var date = document.getElementById("date_profits");
+    var date_end = document.getElementById("date_profits_end");
+    if(date.value.length==0 || date_end.value.length==0)
+    {
+        alert("لم تقم بادخال تاريخ البداية والنهاية")
+    }
+    else{
+    d1=new Date(date.value);
+    d2=new Date(date_end.value);
+    if(d2<d1){
+        alert("الرجاء ادخال تاريخ البداية اكبر من تاريخ النهاية ")
+    }else{
+getProfitsImports();
+getProfitsExpenses();
+getProfitsSelling();
+getProfitsImportsBack();}
+}}

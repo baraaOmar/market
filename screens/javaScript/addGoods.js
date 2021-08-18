@@ -86,6 +86,7 @@ function addImports() {
             if (this.readyState == 4 && this.status == 200) {
                 if (this.responseText !== "there is aproblem in this process") {
                     // document.getElementById("text_warning").innerText="done";
+                  set(this.responseText);
                     alert("تمت اضافة الطلبية بنجاح");
                     getImports();
                 }
@@ -115,15 +116,20 @@ function addSellingOperation() {
     var leng = document.querySelector("#myTable > tbody").childElementCount;
     var j = 0;
 
+
+    var table = document.getElementById("myTable");
+   
+
     if (payed_order.value.length == 0 || date.value.length == 0 || total_price.value.length == 0) {
         alert("يرجى ملئ جميع الحقول لاضافة عملية بيع جديدة")
     } else {
         addOrder();
 
-        while (j < leng) {
-            var quantity = document.getElementById("quantity_order_history" + j);
-            var price = document.getElementById("price_peace" + j);
-            var id = (document.getElementById("in_" + j));
+        for (var i = 0,  row = table.rows[i]; i < table.rows.length ;i++) {
+           // var x = row.cells[3].childNodes[1].value;
+            var quantity = row.cells[3].childNodes[1];//.value;
+            var price = row.cells[2].childNodes[1];//.value;
+            var id = row.cells[1].childNodes[1];//.value;
             var formdata = new FormData();
             formdata.append("id", id.value);
             formdata.append("order_id", order_id);
@@ -145,7 +151,8 @@ function addSellingOperation() {
                     if (this.readyState == 4 && this.status == 200) {
                         if (this.responseText !== "there is aproblem in this process") {
                             // document.getElementById("text_warning").innerText="done";
-                            alert("تمت اضافة الطلبية بنجاح")
+                            alert("تمت اضافة الطلبية بنجاح");
+                            
                         }
                         else {
                             //  document.getElementById("text_warning").innerText="there is aproblem  in this process";
@@ -208,8 +215,8 @@ function addOrder() {
 
 }
 function addPaymants() {
-    var payment = document.getElementById("date_payments");
-    var date = document.getElementById("payed_payments");
+    var date = document.getElementById("date_payments");
+    var payment = document.getElementById("payed_payments");
     var id = document.getElementById("in_customer_name");
 
     var formdata = new FormData();
@@ -339,20 +346,20 @@ function addImportPaymants() {
 }
 function add_back_order(){
   
-        var payment = document.getElementById("payment_order_back");
+      
         var date = document.getElementById("date_order_back");
-        var good_id = document.getElementById("good_order_back");
+       
         var quantity = document.getElementById("quantity_order_back");
-        var order_id = document.getElementById("add_back_order");
+        var sell_id = document.getElementById("add_back_order");
       
         var formdata = new FormData();
-        formdata.append("payment", payment.value);
+      
         formdata.append("date", date.value);
-        formdata.append("good_id", good_id.title);
+        
         formdata.append("quantity", quantity.value);
-        formdata.append("order_id", order_id.value);
-        if (date.value.length == 0 || payment.value.length == 0 || good_id.title.length == 0
-            || quantity.value.length == 0 || order_id.value.length == 0) {
+        formdata.append("sell_id", sell_id.value);
+        if (date.value.length == 0  
+            || quantity.value.length == 0 || sell_id.value.length == 0) {
             alert("الرجاء ملئ جميع الحقول");
         } else {
     

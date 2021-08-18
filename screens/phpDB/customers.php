@@ -7,7 +7,7 @@
     $conn = new mysqli($dbhost, $dbuser, $dbpass,$db) or die("Connect failed: %s\n". $conn -> error);
     return $conn;
      } 
-     $sql = "SELECT `customer_name`,`phone`,date,id FROM `orders`";
+     $sql = "SELECT `customer_name`,`phone`,DATE_FORMAT(date,'%Y-%m-%d') as date,id FROM `orders`";
      $result = conn()->query($sql);
      $out="";$i=0;
  if ($result->num_rows > 0) {

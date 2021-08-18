@@ -70,7 +70,7 @@
           <div class="dropdown">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">الواردات</a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href=".\imports.html">سجل المشتلايات</a>
+              <a class="dropdown-item" href=".\imports.html">سجل المشتريات</a>
               <a class="dropdown-item" href=".\imports.html">ادخال مشتريات</a>
               <a class="dropdown-item" href=".\imports.html">ادخال مرتجع مشتريات</a>
 
@@ -129,7 +129,7 @@
   </div>
 
 
-  <div id="goodsFatherDiv" class="container-fluid col-xl-8">
+  <div id="goodsFatherDiv" class="container-fluid col-xl-10">
     <div class="col-xl-12 right">
       <h3>سجل البضائع</h3>
       <div class="form-group row">
@@ -155,6 +155,8 @@
         <table class="table">
 
           <tr>
+            
+          <th>الكمية المتبقية</th>
             <th>الكمية المباعة</th>
             <th>الكمية </th>
             <th>السعر للبيع</th>
@@ -164,9 +166,8 @@
             <th>باركود</th>
             
             <th>اسم القطعة</th>
-
-
-
+            <th>!</th>
+<th>اضافة كمية تالفة</th>
 
           </tr>
 
@@ -179,23 +180,47 @@
     </div>
   </div>
 
-  <div class="container-fluid  col-lg-6" style="text-align: center;background-color: #5cd4a066;" >
+  <div class="container-fluid  col-lg-10" style="text-align: center;background-color: #5cd4a066;" >
     <h3>ارباح وديون تاريخ معين </h3>
   
     <form>
-      <div class="container-fluid col-md-6">
-        <label for="date_profits">اختر تاريخ </label>
-        <input onchange="getProfitsExpenses()" value="<?php echo date('H:i:s Y-m-j'); ?>" type="date" class="form-control" id="date_profits" placeholder="رقم الطلبية">
+
+    <div class="row " style="text-align: -webkit-right;">
+    <div style="align-self: center;" class="container-fluid col-sm-3">
+      <button type="button" onclick="clearProfitsFields()">مسح الحقول</button>
+    </div>
+    <div style="align-self: center;" class="container-fluid col-sm-3">
+      <button type="button" onclick="getProfits()">عرض الارباح بين التاريخين</button>
+    </div>
+    <div class="container-fluid col-sm-3">
+      <label for="date_profits">تاريخ الانتهاء </label>
+      <input type="date" class="form-control" id="date_profits_end" placeholder="رقم الطلبية">
+    </div>
+    <div class="container-fluid col-sm-3">
+        <label for="date_profits">  تاريخ البداية   </label>
+        <input onchange=""  type="date" class="form-control" id="date_profits" placeholder="رقم الطلبية">
       </div>
+   
+
+  </div>
+
+
+    
+
       <div class="form-row">
-        <div class="form-group col-md-6 right_input">
-          <label for="profits_selling_day">ارباح مبيعات اليوم</label>
+      <div class="form-group col-md-4 right_input">
+          <label for="profits">صافي ربح الطلبية</label>
+          <input min="0" readonly value="0"  type="number" class="form-control" id="profits_debt_selling" placeholder="سعر الجملة">
+        </div>
+        <div class="form-group col-md-4 right_input">
+          <label for="profits_selling_day">مجموع مبيعات اليوم</label>
           <input readonly value="0"  type="number" class="form-control" id="profits_selling_day" placeholder="رقم الطلبية">
         </div>
-        <div class="form-group col-md-6 right_input">
+        <div class="form-group col-md-4 right_input">
           <label for="profits_debt_selling">ديون مبيعات اليوم</label>
           <input min="0" readonly value="0"  type="number" class="form-control" id="profits_debt_selling" placeholder="سعر الجملة">
         </div>
+       
       </div>
       <div class="form-row">
         <div class="form-group col-md-6 right_input">

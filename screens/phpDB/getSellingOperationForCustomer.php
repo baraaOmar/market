@@ -20,7 +20,7 @@ $sql = "SELECT  sum(`payed_price`) as payed,sum(`total_payed`-`payed_price`) as 
       {
       
       $myopj["payed"]= $row["payed"];
-      $myopj["dept"]= $row["dept"];
+      $myopj["dept"]=max(0, $row["dept"]);
      
        $arr[$i++]=$myopj; 
       }

@@ -7,12 +7,11 @@
     $conn = new mysqli($dbhost, $dbuser, $dbpass,$db) or die("Connect failed: %s\n". $conn -> error);
     return $conn;
      } 
-   $good_id=$_POST["good_id"];//"برغي";//
+  
    $date=$_POST["date"];//"برغي";//
-   $id=$_POST["order_id"];//"2";//
+   $id=$_POST["sell_id"];//"2";//
   $quantity=$_POST["quantity"];
-  $payment=$_POST["payment"];
-     $sql = "INSERT INTO `back_selling`(`order_id`, `date`, `quantity`, `good_id`,payment) VALUES ('$id','$date','$quantity','$good_id','$payment')";
+     $sql = "INSERT INTO `back_selling`(`selling_id`, `date`, `quantity`) VALUES ('$id','$date','$quantity')";
      
 if(conn()->query($sql)===true){
         

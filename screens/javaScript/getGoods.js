@@ -1,5 +1,5 @@
 
-getGoods()
+getGoods();
 function getGoodsForType() {
 
     var i = 0;
@@ -41,34 +41,48 @@ function getGoods() {
 
     var leng = document.querySelector("#myTable > tbody").childElementCount;
     --leng;
-   var selectedType = document.getElementById("type_categories")
+    var table = document.getElementById("myTable");
     var myjson;
     if (window.XMLHttpRequest) {//start ajax code
         ajax = new XMLHttpRequest();
     } else {
         ajax = new ActiveXObject("Microsoft.XMLHTTP");
     }
-
+document.getElementsByClassName
     ajax.onreadystatechange = function () {
-
         if (this.readyState == 4 && this.status == 200) {
             if (this.responseText !== "no data found") {
                 myjson = JSON.parse(this.responseText);
-
-                var str = ('datalist' + leng);
+           var  rows=   table.rows[0].cells[1].getElementsByClassName('selectpicker')[0];
              
-                while (myjson[i].name != null) {
+           var str = ('in_' + leng);
+              
+                while (i < myjson.length - 1) {
                     html = ' <option value=' + myjson[i].id + '>' + myjson[i].name + '</option>';
 
+                   rows.innerHTML += (html);
 
-                    document.getElementById(str).innerHTML += html;
-                  
                     i++;
-                }
 
+                }
+                if (i == myjson.length - 1)
+                  {  html = ' <option value=' + myjson[i].id + '>' + myjson[i].name + '</option>';
+
+               rows.innerHTML += (html);
+
+              
+               $(".selectpicker").selectpicker('refresh');}
+
+               
 
             }
+           
+      
+      
         }
+   
+   
+   
     }
     ajax.open("GET", "./phpDB/goods.php?q=", true);
     ajax.send();

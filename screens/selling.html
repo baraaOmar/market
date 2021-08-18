@@ -2,252 +2,278 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
+  <meta meta="meta" charset="utf-8">
+
   <link rel="stylesheet" href="css/tableStyle.css" />
   <link rel="stylesheet" href="css/bootstrap.min.css" />
+
   <link rel="import" href="./table.html">
+  <!----->
+  <script src="js/jquery.min.js"></script>
+
+
+  <script rel="stylesheet" href="../node_modules/popper.js/dist/popper.min.js"></script>
+  <script src="js/popper.js"></script>
+
+  <link defer rel="stylesheet" href="../node_modules/bootstrap-select/dist/css/bootstrap-select.min.css" />
+
+
+
 
   <title>تنويرات الاقصى</title>
 </head>
 
-<nav class="navbar navbar-expand-lg navbar-light  sticky_nav">
-  <div class="container-fluid">
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light  sticky_nav">
+    <div class="container-fluid">
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div style="justify-content: flex-end;" class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div style="justify-content: flex-end;" class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-        <li class="nav-item">
+          <li class="nav-item">
 
-          <div class="dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">الواردات</a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href=".\imports.html">سجل المشتلايات</a>
-              <a class="dropdown-item" href=".\imports.html">ادخال مشتريات</a>
-              <a class="dropdown-item" href=".\imports.html">ادخال مرتجع مشتريات</a>
+            <div class="dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">الواردات</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href=".\imports.html">سجل المشتريات</a>
+                <a class="dropdown-item" href=".\imports.html">ادخال مشتريات</a>
+                <a class="dropdown-item" href=".\imports.html">ادخال مرتجع مشتريات</a>
+
+              </div>
+            </div>
+          </li>
+          <li class="nav-item">
+
+            <div class="dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">المبيعات</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href=".\selling.html">ادخال حركة بيع</a>
+                <a class="dropdown-item" href=".\selling.html">سجل حركات البيع</a>
+
+              </div>
+            </div>
+          </li>
+
+
+          <li class="nav-item">
+
+            <div class="dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">مصروفات عامة</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href=".\expenses.html">سجل المصروفات</a>
+                <a class="dropdown-item" href=".\expenses.html">ادخال مصروفات</a>
+
+              </div>
+            </div>
+          </li>
+          <li class="nav-item">
+
+
+          </li>
+          <li class="nav-item">
+
+            <div class="dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">سجل الارباح</a>
 
             </div>
-          </div>
-        </li>
-        <li class="nav-item">
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href=".\index.php">الصفحة الرئيسية</a>
 
-          <div class="dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">المبيعات</a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href=".\selling.html">ادخال حركة بيع</a>
-              <a class="dropdown-item" href=".\selling.html">سجل حركات البيع</a>
+          </li>
+        </ul>
 
-            </div>
-          </div>
-        </li>
-
-       
-        <li class="nav-item">
-
-          <div class="dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">مصروفات عامة</a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href=".\expenses.html">سجل المصروفات</a>
-              <a class="dropdown-item" href=".\expenses.html">ادخال مصروفات</a>
-
-            </div>
-          </div>
-        </li>
-        <li class="nav-item">
-
-
-        </li>
-        <li class="nav-item">
-
-          <div class="dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">سجل الارباح</a>
-
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href=".\index.php">الصفحة الرئيسية</a>
-
-        </li>
-      </ul>
+      </div>
 
     </div>
-
-  </div>
-</nav>
+  </nav>
 
 
-<h3>عمليات البيع</h3>
-<div class="container-fluid col-xl-10">
-  <div class="row " style="text-align: -webkit-right;">
 
-   
-    <button onclick="addPaymants()"  type="button" class="btn btn-primary btn_margion_bottom">اضافة دفعة</button>
- 
-    
+
+  <h3>عمليات البيع</h3>
+  <div class="container-fluid col-xl-10">
+    <div class="row " style="text-align: -webkit-right;">
+
+
+      <button onclick="addPaymants()" type="button" class="btn btn-primary btn_margion_bottom">اضافة دفعة</button>
+
+
       <div class="container-fluid col-sm-3">
         <label for="date_payments">التاريخ</label>
-        <input type="datetime-local" class="form-control"   id="date_payments" placeholder="التاريخ">
+        <input type="datetime-local" class="form-control" id="date_payments" placeholder="التاريخ">
       </div>
       <div class="container-fluid col-sm-3">
         <label for="payed_payments">المبلغ المدفوع</label>
-        <input min="0" type="number" class="form-control"  id="payed_payments" placeholder="المبلغ المدفوع">
+        <input min="0" type="number" class="form-control" id="payed_payments" placeholder="المبلغ المدفوع">
       </div>
-     
-  
-    <input  id="in_customer_name" onchange="sellingOperationPassedOnCustomerName();sellingPassedOnCustomerName();" placeholder="اسم الزبون" required list="datalist_customer" />
+
+      <select onchange="sellingOperationPassedOnCustomerName();sellingPassedOnCustomerName();" placeholder="اسم الزبون"
+        id="in_customer_name" data-container="body" class="selectpicker " data-live-search="true"
+        data-live-search-style="startsWith">
+
+      </select>
+      <!----   <input id="in_customer_name" onchange="sellingOperationPassedOnCustomerName();sellingPassedOnCustomerName();"
+      placeholder="اسم الزبون" required list="datalist_customer" />
     <datalist id="datalist_customer">
-     
+
     </datalist>
+    ----->
+    </div>
   </div>
-</div>
-<div class="container-fluid col-xl-10">
-  <div class="row " style="text-align: -webkit-right;">
+  <div class="container-fluid col-xl-10">
+    <div class="row " style="text-align: -webkit-right;">
 
-    <div style="text-align: -webkit-right;" class="container-fluid col-sm-3">
-      <label for="customer_name">مجموع الديون </label>
-      <input value="0" readonly type="text" class="form-control" id="customer_name_dept">
-    </div>
-    <div style="text-align: -webkit-right;" class="container-fluid col-sm-3">
-      <label for="customer_name">المبلغ الكلي المدفوع </label>
-      <input value="0" readonly type="text" class="form-control" id="customer_name_payed">
-    </div>
-    
-   
-  </div>
-</div>
-<div class="container-fluid col-xl-10">
-  <div class="row " style="text-align: -webkit-right;">
-    <div style="align-self: center;" class="container-fluid col-sm-3">
-      <button onclick="clear_fields()">مسح الحقول</button>
-    </div>
-    <div style="align-self: center;" class="container-fluid col-sm-3">
-      <button onclick="sellingOperation_between_dates()">عرض المبيعات بين التاريخين</button>
-    </div>
-    <div class="container-fluid col-sm-3">
-      <label for="date_profits">تاريخ البداية </label>
-      <input type="date" class="form-control" id="date_start" placeholder="رقم الطلبية">
-    </div>
-    <div class="container-fluid col-sm-3">
-      <label for="date_profits">تاريخ الانتهاء </label>
-      <input type="date" class="form-control" id="date_end" placeholder="رقم الطلبية">
-    </div>
-
-  </div>
-</div>
-<div style="box-shadow: 1px 1px 1px 1px;overflow: scroll;height: 500px;margin-bottom: 200px;"
-  class="container-fluid col-xl-11">
-
-
- <!-- Modal -->
- <div class="modal fade" id="exampleModal_order_back" tabindex="-1" role="dialog"
- aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
- <div class="modal-dialog modal-dialog-centered" role="document">
-   <div class="modal-content">
-     <div class="modal-header">
-       <h5 class="modal-title" id="exampleModalLongTitle">اضافة مرتجع مشتريات</h5>
-       <button type="button" class="close" data-dismiss="exampleModalLongTitle" aria-label="Close">
-         <span aria-hidden="true">&times;</span>
-       </button>
-     </div>
-     <div class="modal-body">
-     <form>
-       <div class="form-group row">
-         <div class="col-sm-8  ">
-           <input type="number" class="form-control" placeholder="المبلغ المدفوع" id="payment_order_back">
-         </div>
-         <label for="provider_name" class="col-sm-4 col-form-label">المبلغ المدفوع</label>
-
-       </div>
-       <div class="form-group row">
-         <div class="col-sm-8  ">
-           <input type="datetime-local" class="form-control" placeholder="التاريخ" id="date_order_back">
-         </div>
-         <label for="provider_phone" class="col-sm-4 col-form-label">التاريخ</label>
-
-       </div>
-       <div class="form-group row">
-        <div class="col-sm-8  ">
-          <input type="text" class="form-control" placeholder="الصنف" id="good_order_back">
-        </div>
-        <label for="good_order_back" class="col-sm-4 col-form-label">الصنف</label>
-
+      <div style="text-align: -webkit-right;" class="container-fluid col-sm-3">
+        <label for="customer_name">مجموع الديون </label>
+        <input value="0" readonly type="text" class="form-control" id="customer_name_dept">
       </div>
-      <div class="form-group row">
-        <div class="col-sm-8  ">
-          <input type="number" class="form-control" placeholder="الكمية المرتجعة" id="quantity_order_back">
-        </div>
-        <label for="provider_name" class="col-sm-4 col-form-label">الكمية المرتجعة</label>
-
+      <div style="text-align: -webkit-right;" class="container-fluid col-sm-3">
+        <label for="customer_name">المبلغ الكلي المدفوع </label>
+        <input value="0" readonly type="text" class="form-control" id="customer_name_payed">
       </div>
-     </form>
-     </div>
-     <div class="modal-footer">
-       <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
-       <button id="add_back_order"  type="button" onclick="add_back_order()" class="btn btn-primary">حفظ التغييرات</button>
-     </div>
-   </div>
- </div>
-</div>
+
+
+    </div>
+  </div>
+  <div class="container-fluid col-xl-10">
+    <div class="row " style="text-align: -webkit-right;">
+      <div style="align-self: center;" class="container-fluid col-sm-3">
+        <button onclick="clear_fields()">مسح الحقول</button>
+      </div>
+      <div style="align-self: center;" class="container-fluid col-sm-3">
+        <button onclick="sellingOperation_between_dates()">عرض المبيعات بين التاريخين</button>
+      </div>
+      <div class="container-fluid col-sm-3">
+        <label for="date_profits">تاريخ البداية </label>
+        <input type="date" class="form-control" id="date_start" placeholder="رقم الطلبية">
+      </div>
+      <div class="container-fluid col-sm-3">
+        <label for="date_profits">تاريخ الانتهاء </label>
+        <input type="date" class="form-control" id="date_end" placeholder="رقم الطلبية">
+      </div>
+
+    </div>
+  </div>
+  <div style="box-shadow: 1px 1px 1px 1px;overflow: scroll;height: 500px;margin-bottom: 200px;"
+    class="container-fluid col-xl-12">
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal_order_back" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">اضافة مرتجع مشتريات</h5>
+            <button type="button" class="close" data-dismiss="exampleModalLongTitle" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+
+              <div class="form-group row">
+                <div class="col-sm-8  ">
+                  <input type="datetime-local" class="form-control" placeholder="التاريخ" id="date_order_back">
+                </div>
+                <label for="provider_phone" class="col-sm-4 col-form-label">التاريخ</label>
+
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-8  ">
+                  <input type="text" class="form-control" placeholder="الصنف" id="good_order_back">
+                </div>
+                <label for="good_order_back" class="col-sm-4 col-form-label">الصنف</label>
+
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-8  ">
+                  <input type="number" class="form-control" placeholder="الكمية المرتجعة" id="quantity_order_back">
+                </div>
+                <label for="provider_name" class="col-sm-4 col-form-label">الكمية المرتجعة</label>
+
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+            <button id="add_back_order" type="button" onclick="add_back_order()" class="btn btn-primary">حفظ
+              التغييرات</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
 
 
 
+    <table style="width: 100%;" class="table">
 
-  <table style="width: 100%;" class="table">
+      <tr>
 
-    <tr>
-
-
-      <th>اسم الموظف</th>
-      <th>تاريخ الادخال</th>
-      <th>المبلغ المتبقي على الزبون</th>
-      <th>الزبون</th>
-
-      <th>الكمية</th>
-      <th>سعر البيع الكلي</th>
-      <th>سعر البيع لكل قطعة</th>
-<td>المبلغ المدفوع</td>
-
-      <th>القطعة</th>
-      <th>&nbsp;</th>
-
-    </tr>
-
-    <tbody id="selling_history">
+        <th>اضافة كمية راجعة</th>
 
 
-    </tbody>
-  </table>
+        <th>اسم الموظف</th>
+        <th>تاريخ الادخال</th>
+        <th>المبلغ المتبقي على الزبون</th>
+        <th>الزبون</th>
+        <th>الكمية</th>
+        <th>الربح بالقطعة</th>
+        <th>صافي الربح</th>
+        <th>سعر البيع الكلي</th>
+        <th>السعر الحقيقي الكلي </th>
+        <th>سعر البيع لكل قطعة</th>
+        <th>المبلغ المدفوع</th>
+        <th>كمية راجعة</th>
+        <th>القطعة</th>
+
+
+      </tr>
+
+      <tbody id="selling_history">
+
+
+      </tbody>
+    </table>
 
 
 
-</div>
+  </div>
 
-<div style="padding: 20px;box-shadow: 1px 1px 1px 1px; text-align: -webkit-center;background-color: #87b7ea24;"
-  class="container-fluid col-xl-7">
+  <div style="padding: 20px;box-shadow: 1px 1px 1px 1px; text-align: -webkit-center;background-color: #87b7ea24;"
+    class="container-fluid col-xl-7">
 
-  <h3>اضافة عملية البيع</h3>
-  <form>
+    <h3>اضافة عملية البيع</h3>
+
     <button style="background-color: #17a2b8 !important;margin-bottom: 20px;" type="button" onclick="myFunction()"
       class="btn btn-success"> اضافة عنصر بيع جديد</button>
     <div style="max-height: 250px;
        overflow: scroll;">
       <table id="myTable">
-        <tr style="background-color: #eef5fc;" >
-          <td>
+        <tr style="background-color: #eef5fc;">
 
-            <input onchange="getsellingOperationTotalPrice()" id="in_0" placeholder="نوع القطعة" required list="datalist0" />
-            <datalist id="datalist0">
-             
-            </datalist>
+          <td>
+            <button style="background-color: red; color: white;border-radius: 100%;" type="button"
+              onclick="deleteRow(this);getsellingOperationTotalPrice()">X</button>
+
+          </td>
+          <td>
+            <select data-container="body" onchange="getsellingOperationTotalPrice()" class="selectpicker " id="in_0"
+              placeholder="نوع القطعة" data-live-search="true" data-live-search-style="contains">
+
+            </select>
           </td>
           <td> <input onchange="getsellingOperationTotalPrice()" type="number" min="0" class="form-control"
               id="quantity_order_history0" placeholder="الكمية"></td>
-          <td> <input onchange="getsellingOperationTotalPrice()" type="number" min="0" class="form-control" id="price_peace0" placeholder="سعر كل قطعة">
+          <td> <input onchange="getsellingOperationTotalPrice()" type="number" min="0" class="form-control"
+              id="price_peace0" placeholder="سعر كل قطعة">
           </td>
 
         </tr>
@@ -255,91 +281,114 @@
       </table>
     </div>
 
+    <form>
 
+      <div class="form-group row">
+        <div class="col-sm-8">
+          <input type="number" class="form-control" min="0" id="payed_order" placeholder="المبلغ المدفوع">
+        </div>
+        <label for="payed_order" class="col-sm-4 col-form-label">المبلغ المدفوع</label>
 
-    <div class="form-group row">
-      <div class="col-sm-8">
-        <input class="form-control" min="0" id="payed_order" placeholder="المبلغ المدفوع">
       </div>
-      <label for="payed_order" class="col-sm-4 col-form-label">المبلغ المدفوع</label>
+      <div class="form-group row">
+        <div class="col-sm-8">
+          <input type="datetime-local" class="form-control" id="date_order" placeholder="تاريخ البيع">
+        </div>
+        <label for="date_order" class="col-sm-4 col-form-label">تاريخ البيع</label>
 
-    </div>
-    <div class="form-group row">
-      <div class="col-sm-8">
-        <input  type="datetime-local" class="form-control" id="date_order" placeholder="تاريخ البيع">
       </div>
-      <label for="date_order" class="col-sm-4 col-form-label">تاريخ البيع</label>
+      <div class="form-group row">
+        <div class="col-sm-8">
+          <input type="number" value="0" readonly class="form-control" min="0" id="total_price_order"
+            placeholder="السعر الكلي المطلوب">
+        </div>
+        <label for="total_price_order" class="col-sm-4 col-form-label">السعر الكلي المطلوب</label>
 
-    </div>
-    <div class="form-group row">
-      <div class="col-sm-8">
-        <input value="0" readonly class="form-control" min="0" id="total_price_order" placeholder="السعر الكلي المطلوب">
       </div>
-      <label for="total_price_order" class="col-sm-4 col-form-label">السعر الكلي المطلوب</label>
+      <div class="form-group row">
+        <div class="col-sm-8">
+          <input type="number" value="0" readonly class="form-control" min="0" id="total_price_order_entered_price"
+            placeholder="السعر الكلي المطلوب من الاسعار المدخلة">
+        </div>
+        <label for="total_price_order_entered_price" class="col-sm-4 col-form-label"> السعر الكلي المطلوب من الاسعار
+          المدخلة</label>
 
-    </div>
-    <div class="form-group row">
-      <div class="col-sm-8">
-        <input value="0" readonly class="form-control" min="0" id="total_price_order_entered_price" placeholder="السعر الكلي المطلوب من الاسعار المدخلة">
       </div>
-      <label for="total_price_order_entered_price" class="col-sm-4 col-form-label"> السعر الكلي المطلوب من الاسعار المدخلة</label>
+      <div class="form-group row">
+        <div class="col-sm-8">
+          <input class="form-control" id="customer_name" placeholder="اسم المشتري">
+        </div>
+        <label for="customer_name" class="col-sm-4 col-form-label">اسم المشتري</label>
 
-    </div>
-    <div class="form-group row">
-      <div class="col-sm-8">
-        <input class="form-control" id="customer_name" placeholder="اسم المشتري">
       </div>
-      <label for="customer_name" class="col-sm-4 col-form-label">اسم المشتري</label>
+      <div class="form-group row">
+        <div class="col-sm-8">
+          <input class="form-control" id="customer_phone" placeholder=" موبايل المشتري">
+        </div>
+        <label for="customer_name" class="col-sm-4 col-form-label"> موبايل المشتري</label>
 
-    </div>
-    <div class="form-group row">
-      <div class="col-sm-8">
-        <input class="form-control" id="customer_phone" placeholder=" موبايل المشتري">
       </div>
-      <label for="customer_name" class="col-sm-4 col-form-label"> موبايل المشتري</label>
-
-    </div>
-    <button onclick="addSellingOperation()" type="button" class="btn btn-success">اضافة عملية بيع</button>
-   </form>
+      <button onclick="addSellingOperation()" type="button" class="btn btn-success">اضافة عملية بيع</button>
+    </form>
 
 
 
-
-</div>
-
+  </div>
 
 
-<script>
-function x(){
-  document.getElementById("myTable").deleteRow(0);
-}
-  function myFunction() {
+
+  <script>
     var table = document.getElementById("myTable");
-    var row = table.insertRow(0);
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
-    var cell3 = row.insertCell(2);
-    var cell4 = row.insertCell(3);
-    var id = document.querySelector("#myTable > tbody").childElementCount;
-    --id;
-    cell1.innerHTML = '  <input onchange="getsellingOperationTotalPrice()" id="in_' + id + '"  placeholder="نوع القطعة"   list="datalist' + id + '" required  /> <datalist id="datalist' + id + '" ></datalist>';
+    for (var i = 0, row = table.rows[i]; i < table.rows.length; i++) {
 
-    cell2.innerHTML = ' <input onchange="getsellingOperationTotalPrice()" type="number" min="0" class="form-control" id="quantity_order_history' + id + '" placeholder="الكمية">';
-    cell3.innerHTML = ' <input onchange="getsellingOperationTotalPrice()" type="number" min="0" class="form-control" id="price_peace' + id + '" placeholder="سعر كل قطعة">';
-cell4.innerHTML='  <button  style="width: 30px;height: 30px;background-color: red; color: white;border-radius: 100%;" type="button" onclick="x('+id+')" >X</button>'
-    getGoods();
-  }
+      var x = row.cells[3].childNodes[1].value;
 
-</script>
 
-<script src="./javaScript/getGoods.js"></script>
-<script src="./javaScript/get_Imported_types.js"></script>
-<script src="./javaScript/addGoods.js"></script>
-<script src="./javaScript/calculate_total_price_goods.js"></script>
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="./javaScript/getSellingOperation.js"></script>
-<script src="./javaScript/getCategories.js"></script>
-<script src="./javaScript/getSellingHistoty.js"></script>
+    }
 
-<body>
+
+    function deleteRow(btn) {
+      var row = btn.parentNode.parentNode;
+      row.parentNode.removeChild(row);
+    }
+    function myFunction() {
+      var table = document.getElementById("myTable");
+      var row = table.insertRow(0);
+      var cell4 = row.insertCell(0);
+      var cell1 = row.insertCell(1);
+      var cell2 = row.insertCell(2);
+      var cell3 = row.insertCell(3);
+
+      var id = document.querySelector("#myTable > tbody").childElementCount;
+      --id;
+
+      // '  <input onchange="getsellingOperationTotalPrice()" id="in_' + id + '"  placeholder="نوع القطعة"   list="datalist' + id + '" required  /> <datalist id="datalist' + id + '" ></datalist>';
+      cell1.innerHTML = '<select data-container="body" onchange="getsellingOperationTotalPrice()" class="selectpicker" id="in_' + id + '"  placeholder="نوع القطعة"   data-live-search="true"  data-live-search-style="contains" ></select>';
+      cell2.innerHTML = ' <input onchange="getsellingOperationTotalPrice()" type="number" min="0" class="form-control" id="quantity_order_history' + id + '" placeholder="الكمية">';
+      cell3.innerHTML = ' <input onchange="getsellingOperationTotalPrice()" type="number" value="0" min="0" class="form-control" id="price_peace' + id + '" placeholder="سعر كل قطعة">';
+      cell4.innerHTML = '  <button  style="background-color: red; color: white;border-radius: 100%;" type="button" onclick="deleteRow(this)" >X</button>';
+
+      getGoods();
+    }
+
+  </script>
+
+  <script src="./javaScript/addGoods.js"></script>
+  <script src="./javaScript/calculate_total_price_goods.js"></script>
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/popper.js"></script>
+
+
+  <script src="../node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+
+  <script src="./javaScript/getGoods.js"></script>
+  <script src="./javaScript/getSellingOperation.js"></script>
+
+  <script src="./javaScript/getSellingHistoty.js"></script>
+
+</body>
+
+</html>

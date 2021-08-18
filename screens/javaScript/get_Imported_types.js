@@ -10,22 +10,33 @@ function getImports() {
         ajax = new ActiveXObject("Microsoft.XMLHTTP");
     }
 
-    document.getElementById("goods_orders_select").innerHTML ="";
-    document.getElementById("back_import_select_type").innerHTML="";
+    document.getElementById("goods_orders_select").innerHTML = "";
+    document.getElementById("back_import_select_type").innerHTML = "";
     ajax.onreadystatechange = function () {
 
         if (this.readyState == 4 && this.status == 200) {
             if (this.responseText !== "no data found") {
                 myjson = JSON.parse(this.responseText);
 
-                while (myjson[i].name != null) {
-                    if (myjson[i].sales_bill_type == 1)
-                        document.getElementById("goods_orders_select").innerHTML += ' <option value=' + myjson[i].id + '>' + myjson[i].order_number+"  "+myjson[i].Supplier_name + '</option>';
+                while (i<myjson.length-1) {
+                    if (myjson[i].sales_bill_type == 1) {
+                        document.getElementById("goods_orders_select").innerHTML += ' <option value=' + myjson[i].id + '>' + myjson[i].order_number + "  " + myjson[i].Supplier_name + '</option>';
+                    } 
                     if (myjson[i].sales_bill_type == 2)
-                        document.getElementById("back_import_select_type").innerHTML += ' <option value=' + myjson[i].id + '>' + myjson[i].order_number +"  "+myjson[i].Supplier_name +'</option>';
+                        document.getElementById("back_import_select_type").innerHTML += ' <option value=' + myjson[i].id + '>' + myjson[i].order_number + "  " + myjson[i].Supplier_name + '</option>';
 
                     i++;
 
+
+                }
+                if(myjson.length-1==i){
+                    if (myjson[i].sales_bill_type == 1) {
+                        document.getElementById("goods_orders_select").innerHTML += ' <option value=' + myjson[i].id + '>' + myjson[i].order_number + "  " + myjson[i].Supplier_name + '</option>';
+                    } 
+                    if (myjson[i].sales_bill_type == 2)
+                        document.getElementById("back_import_select_type").innerHTML += ' <option value=' + myjson[i].id + '>' + myjson[i].order_number + "  " + myjson[i].Supplier_name + '</option>';
+                      
+                        $(".selectpicker").selectpicker('refresh');
 
                 }
             }
@@ -58,10 +69,10 @@ function getImportsFilteredTypes() {
         if (this.readyState == 4 && this.status == 200) {
             if (this.responseText !== "no data found") {
                 myjson = JSON.parse(this.responseText);
-                while (myjson[0].name != null) {
+                while (myjson[i].name != null) {
                     var min = myjson[i].total_price - myjson[i].payed;
-                    html = ' <tr role="alert"> <td>' + text + '</td> <td>' + myjson[i].name + '</td> <td>' + myjson[i].date + '</td> <td>' + myjson[i].Supplier_name + '</td> <td>' + myjson[i].total_price + '</td>  <td>' + myjson[i].order_number + '</td>   <td>' + myjson[i].payed + '</td> <td>' + min + '</td> <td> <input  type="checkbox" data-toggle="modal" onclick=(document.getElementById("add_payment_import").value=' + myjson[i].id + ') data-target="#exampleModal"> اضافة دفعة </input></td>  </tr>';
-                    document.getElementById("import_table_category").innerHTML += html;
+                    html = ' <tr role="alert"> <td>' + text + '</td> <td>' + myjson[i].name + '</td> <td>' + myjson[i].date + '</td> <td>' + myjson[i].Supplier_name + '</td> <td>' + myjson[i].total_price + '</td>  <td>' + myjson[i].order_number + '</td>   <td>' + "myjson[i].payed "+ '</td> <td>' + min + '</td> <td>                       <div  style="text-align-last: center;           align-self: center;" class="dropdown  form-group col-md-6   right_input">            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">        طريقة الدفع                  </button>     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">               <a onclick="document.getElementById("add_payment_bank").value='+myjson[i].id+'" class="dropdown-item" data-toggle="modal" data-target="#bankModal">تحويل بنك</a>     <a onclick="document.getElementById("add_payment_cheque").value='+myjson[i].id+'" class="dropdown-item" data-toggle="modal" data-target="#chequeModal" >شيكات</a>  <a onclick="document.getElementById("add_payment_cash").value='+myjson[i].id+'" class="dropdown-item" data-toggle="modal" data-target="#cashModal">كاش</a> </div>   </div> </td>  </tr>';
+                       document.getElementById("import_table_category").innerHTML += html;
 
                     i++;
 
@@ -106,10 +117,11 @@ function imports_between_dates() {
                 if (this.responseText !== "no data found") {
                     myjson = JSON.parse(this.responseText);
 
-                    while (myjson[0].name != null) {
+                    while (myjson[i].name != null) {
                         var min = myjson[i].total_price - myjson[i].payed;
-                        html = ' <tr role="alert"> <td>' + myjson[i].name + '</td> <td>' + myjson[i].date + '</td> <td>' + myjson[i].Supplier_name + '</td> <td>' + myjson[i].total_price + '</td>  <td>' + myjson[i].order_number + '</td>   <td>' + myjson[i].payed + '</td> <td>' + min + '</td>   </tr>';
-                        document.getElementById("import_table_category").innerHTML += html;
+                        var text = myjson[i].sales_bill_type == 1 ? "فاتورة  مشتريات " : "فاتورة مرتجع مشتريات ";
+                        html = ' <tr role="alert"> <td>' + text + '</td> <td>' + myjson[i].name + '</td> <td>' + myjson[i].date + '</td> <td>' + myjson[i].Supplier_name + '</td> <td>' + myjson[i].total_price + '</td>  <td>' + myjson[i].order_number + '</td>   <td>' + "myjson[i].payed "+ '</td> <td>' + min + '</td> <td>                       <div  style="text-align-last: center;           align-self: center;" class="dropdown  form-group col-md-6   right_input">            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">        طريقة الدفع                  </button>     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">               <a onclick="document.getElementById("add_payment_bank").value='+myjson[i].id+'" class="dropdown-item" data-toggle="modal" data-target="#bankModal">تحويل بنك</a>     <a onclick="document.getElementById("add_payment_cheque").value='+myjson[i].id+'" class="dropdown-item" data-toggle="modal" data-target="#chequeModal" >شيكات</a>  <a onclick="document.getElementById("add_payment_cash").value='+myjson[i].id+'" class="dropdown-item" data-toggle="modal" data-target="#cashModal">كاش</a> </div>   </div> </td>  </tr>';
+                     document.getElementById("import_table_category").innerHTML += html;
 
                         i++;
 
@@ -125,5 +137,5 @@ function imports_between_dates() {
 function clear_fields() {
     document.getElementById("date_start_imports").value = "";
     document.getElementById("date_end_imports").value = "";
-    getImports();
+    getImportsFilteredTypes();
 }

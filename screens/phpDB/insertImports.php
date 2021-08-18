@@ -14,13 +14,13 @@
    $date=$_POST["date"];//"2";//
   $type=$_POST["type"];
   $provider=$_POST["name_import"];
-     $sql = "INSERT INTO `imports` ( `Supplier_name`, `order_number`, `employee_id`, `payed`, `total_price`, `date`,`sales_bill_type`, `provider_id`) VALUES ('$name', '$number','1','$payed','$price','$date','$type','$provider')";
+     $sql = "INSERT INTO `imports` ( `Supplier_name`, `order_number`, `employee_id`,  `total_price`, `date`,`sales_bill_type`, `provider_id`) VALUES ('$name', '$number','1','$price','$date','$type','$provider')";
      
      $out="";$i=0;
  
-if(conn()->query($sql)===true){
-        
- echo("insertDone");}
+iif($conn->query($sql)===true){
+        $last_id = mysqli_insert_id($conn);   
+     echo($last_id);}
  else{
          echo("there is aproblem  in this process");
  }

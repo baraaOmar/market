@@ -58,16 +58,23 @@ function getGoods() {
             if (this.responseText !== "no data found") {
                 myjson = JSON.parse(this.responseText);
 
-                var str_2 = ('back_in_datalist' + leng_myTable_back_import);
-                while (myjson[i].name != null) {
+                var str_2 = ('back_in_' + leng_myTable_back_import);
+              
+                while (i < myjson.length - 1) {
                     html = ' <option value=' + myjson[i].id + '>' + myjson[i].name + '</option>';
-
 
                     document.getElementById(str_2).innerHTML += html;
 
                     i++;
-                }
 
+                }
+                if (i == myjson.length - 1)
+                  {  html = ' <option value=' + myjson[i].id + '>' + myjson[i].name + '</option>';
+
+                  document.getElementById(str_2).innerHTML += html;
+
+              
+               $(".selectpicker").selectpicker('refresh');}
 
             }
         }
