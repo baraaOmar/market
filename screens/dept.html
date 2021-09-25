@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/tableStyle.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="import" href="./table.html">
+
+    <title>تنويرات الاقصى</title>
+</head>
+
+<body>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal_rapish" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">اضافة كميات تالفة</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group row">
+                            <div class="col-sm-8  ">
+                                <input type="text" class="form-control" placeholder="القطعة" id="rapish_good">
+                            </div>
+                            <label for="rapish_good" class="col-sm-4 col-form-label">اسم القطعة</label>
+
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-8  ">
+                                <input type="number" min="0" class="form-control" placeholder="للاتلاف"
+                                    id="rapish_quantity">
+                            </div>
+                            <label for="rapish_quantity" class="col-sm-4 col-form-label">الكمية للاتلاف</label>
+
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-8  ">
+                                <input type="datetime-local" class="form-control" placeholder="التاريخ"
+                                    id="rapish_date">
+                            </div>
+                            <label for="provider_phone" class="col-sm-4 col-form-label">التاريخ</label>
+
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+                    <button id="add_rapish" type="button" onclick="addRapish()" class="btn btn-primary">حفظ
+                        التغييرات</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light  sticky_nav">
+        <div class="container-fluid">
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div style="justify-content: flex-end;" class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                    <li class="nav-item">
+
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">الواردات</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href=".\imports.html">سجل المشتريات</a>
+                                <a class="dropdown-item" href=".\imports.html">ادخال مشتريات</a>
+                                <a class="dropdown-item" href=".\imports.html">ادخال مرتجع مشتريات</a>
+
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">المبيعات</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href=".\selling.html">ادخال حركة بيع</a>
+                                <a class="dropdown-item" href=".\selling.html">سجل حركات البيع</a>
+
+                            </div>
+                        </div>
+                    </li>
+
+
+                    <li class="nav-item">
+
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">مصروفات عامة</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href=".\expenses.html">سجل المصروفات</a>
+                                <a class="dropdown-item" href=".\expenses.html">ادخال مصروفات</a>
+
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+
+
+                    </li>
+                    <li class="nav-item">
+
+        
+                        <a class="nav-link active" aria-current="page" href=".\dept.html">سجل الديون</a>
+            
+                    
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href=".\index.php">الصفحة الرئيسية</a>
+
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+    </nav>
+
+
+
+    <h3>عمليات البيع</h3>
+
+    <div style="margin-bottom: 60px;" class="container-fluid col-xl-11">
+      <div class="row " style="text-align: -webkit-right;">
+        <div style="align-self: center;" class="container-fluid col-sm-3">
+          <button onclick="clear_fields()">مسح الحقول</button>
+        </div>
+        <div style="align-self: center;" class="container-fluid col-sm-3">
+          <button onclick="getOrdersBetween2dates()">عرض المبيعات بين التاريخين</button>
+        </div>
+  
+        <div class="container-fluid col-sm-3">
+          <label for="date_profits">تاريخ الانتهاء </label>
+          <input type="date" class="form-control" id="date_end" placeholder="رقم الطلبية">
+        </div>
+        <div class="container-fluid col-sm-3">
+          <label for="date_profits">تاريخ البداية </label>
+          <input type="date" class="form-control" id="date_start" placeholder="رقم الطلبية">
+        </div>
+      </div>
+    </div>
+
+  
+
+<div style="height: 400px;margin-bottom: 200px;" class="container-fluid col-xl-12">
+    
+    <table style="width: 100%;" class="table">
+
+        <tr>
+          <th>عرض سجل الدفعات</th>
+      
+       
+          <th>تاريخ الادخال</th>
+  
+          <th>الزبون</th>
+          <th>الهاتف</th>
+  
+          <th> صافي الربح </th>
+  
+          <th>سعر الطلبية الكلي</th>
+  
+          <th>المبلغ المدفوع</th>
+  
+          <th>المبلغ المتبقي</th>
+  
+          <th></th>
+  
+        
+  
+        </tr>
+  
+        <tbody id="dept_history">
+  
+  
+        </tbody>
+      </table>
+  
+</div>
+<div id="PaymentDiv" style="display: none;margin-bottom: 60px;" class="container-fluid col-xl-12">
+    <div class="row " style="text-align: -webkit-right;">
+
+
+
+      <div class="container-fluid col-sm-4">
+
+        <div style="height: 250px;overflow: scroll;">
+          <table class="table">
+
+            <tr>
+
+
+              <th>التاريخ</th>
+              <th>المبلغ المدفوع</th>
+
+
+            </tr>
+
+            <tbody id="chash_history">
+
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="container-fluid col-sm-6">
+
+        <div style="height: 250px;;overflow: scroll;">
+          <table class="table">
+
+            <tr>
+
+
+              <th>تاريخ الدفع</th>
+              <th>تاريخ الاستحقاق</th>
+
+              <th>رقم الشيك</th>
+              <th>قيمة الشيك</th>
+
+              <th>مدفوع ل</th>
+            </tr>
+
+            <tbody id="cheque_history">
+
+
+            </tbody>
+          </table>
+        </div>
+        <div style="height: 250px;overflow: scroll;">
+          <table class="table">
+
+            <tr>
+              <th>تاريخ الدفع</th>
+
+
+              <th>المبلغ</th>
+              <th>من حساب</th>
+
+              <th>الي حساب</th>
+            </tr>
+
+            <tbody id="bank_history">
+
+
+            </tbody>
+          </table>
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+
+  </div>
+  
+  <div style="height: 400px;margin-bottom: 200px;display: none;" class="container-fluid col-xl-12">
+  <table style="width: 100%;" class="table">
+
+    <tr>
+
+      <th>اضافة كمية راجعة</th>
+
+
+      <th>اسم الموظف</th>
+      <th>تاريخ الادخال</th>
+
+      <th>الزبون</th>
+      <th>الكمية</th>
+      <th>الربح بالقطعة</th>
+
+      <th>سعر الطلبية الكلي</th>
+
+
+
+      <th>سعر البيع لكل قطعة</th>
+
+      <th>كمية راجعة</th>
+      <th>القطعة</th>
+
+
+    </tr>
+
+    <tbody id="selling_history">
+
+
+    </tbody>
+  </table>
+</div>
+  <script>  function showPayDiv(node,id) {
+    var checked = node.checked;alert(node);
+     cashPayments(id);
+  bankPayments(id);
+  chequePayments(id);
+    if (checked) {
+      document.getElementById("PaymentDiv").style.display = "block";
+    } else {
+      document.getElementById("PaymentDiv").style.display = "none";
+
+    }
+  }
+</script>
+<script src="js/moment.min.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="./javaScript/dept.js" ></script>
+<script src="./javaScript/Reports.js" ></script>
+
+</body>
+
+</html>

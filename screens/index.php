@@ -107,10 +107,10 @@
         </li>
         <li class="nav-item">
 
-          <div class="dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">سجل الارباح</a>
+        
+            <a class="nav-link active" aria-current="page" href=".\dept.html">سجل الديون</a>
 
-          </div>
+        
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href=".\index.php">الصفحة الرئيسية</a>
@@ -166,7 +166,7 @@
             <th>باركود</th>
             
             <th>اسم القطعة</th>
-            <th>!</th>
+        <!---    <th>!</th> --->
 <th>اضافة كمية تالفة</th>
 
           </tr>
@@ -208,29 +208,41 @@
     
 
       <div class="form-row">
-      <div class="form-group col-md-4 right_input">
-          <label for="profits">صافي ربح الطلبية</label>
-          <input min="0" readonly value="0"  type="number" class="form-control" id="profits_debt_selling" placeholder="سعر الجملة">
+      <div class="form-group col-md-3 right_input">
+          <label for="profits_back_selling">مبيعات راجعة</label>
+          <input min="0" readonly value="0"  type="number" class="form-control" id="profits_back_selling" placeholder="مبيعات راجعة">
         </div>
-        <div class="form-group col-md-4 right_input">
+      <div class="form-group col-md-3 right_input">
+        
+          <label for="profits">صافي ربح الطلبية</label>
+          <input min="0" readonly value="0"  type="number" class="form-control" id="profits_selling" placeholder="سعر الجملة">
+        </div>
+        <div class="form-group col-md-3 right_input">
           <label for="profits_selling_day">مجموع مبيعات اليوم</label>
           <input readonly value="0"  type="number" class="form-control" id="profits_selling_day" placeholder="رقم الطلبية">
         </div>
-        <div class="form-group col-md-4 right_input">
+        <div class="form-group col-md-3 right_input">
           <label for="profits_debt_selling">ديون مبيعات اليوم</label>
           <input min="0" readonly value="0"  type="number" class="form-control" id="profits_debt_selling" placeholder="سعر الجملة">
         </div>
+      
        
       </div>
       <div class="form-row">
-        <div class="form-group col-md-6 right_input">
+        <div class="form-group col-md-4 right_input">
           <label for="imports_selling_day">مجموع طلبيات  اليوم</label>
           <input readonly value="0"  type="number" class="form-control" id="imports_selling_day" placeholder="رقم الطلبية">
         </div>
-        <div class="form-group col-md-6 right_input">
+        <div class="form-group col-md-4 right_input">
           <label for="imports_debt_selling">ديون طلبيات اليوم</label>
           <input min="0" readonly value="0"  type="number" class="form-control" id="imports_debt_selling" placeholder="سعر الجملة">
         </div>
+        
+        <div class="form-group col-md-4 right_input">
+          <label for="back_import_total">مجموع مرتجع مشتريات  اليوم</label>
+          <input readonly value="0"  type="number" class="form-control" id="back_import_total" placeholder="رقم الطلبية">
+        </div>
+
       </div>
     
       <div class="form-row">
@@ -243,13 +255,10 @@
           <input min="0" readonly value="0"  type="number" class="form-control" id="expenses_debt_selling" placeholder="سعر الجملة">
         </div>
       </div>
-     
+     <!--
       <div class="form-row">
-        <div class="form-group col-md-4 right_input">
-          <label for="back_import_total">مجموع مرتجع مشتريات  اليوم</label>
-          <input readonly value="0"  type="number" class="form-control" id="back_import_total" placeholder="رقم الطلبية">
-        </div>
-        <div class="form-group col-md-4 right_input">
+       
+       <div class="form-group col-md-4 right_input">
           <label for="back_import_dept">المبلغ المتبقي  للتحصيل </label>
           <input min="0" readonly value="0"  type="number" class="form-control" id="back_import_dept" placeholder="سعر الجملة">
         </div>
@@ -257,7 +266,9 @@
           <label for="expenses_selling_payed">المبلغ المحصل</label>
           <input readonly value="0"  type="number" class="form-control" id="expenses_selling_payed" placeholder="رقم الطلبية">
         </div>
+
       </div>
+      --->
      </form>
   
    </div>

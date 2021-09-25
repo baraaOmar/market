@@ -1,17 +1,10 @@
 <?php
- function  conn(){
-    $dbhost = "localhost";
-    $dbuser = "root";
-    $dbpass = "";
-    $db = "aqsa";
-    $conn = new mysqli($dbhost, $dbuser, $dbpass,$db) or die("Connect failed: %s\n". $conn -> error);
-    return $conn;
-     } 
+ require_once "./connection.php"; 
      $search=$_POST["name"];
         $sql = "SELECT name,phone ,id FROM `orders` where name LIKE '%$search%' ";
        
     
-     $result = conn()->query($sql);
+     $result = $conn->query($sql);
      $i=0;
  if ($result->num_rows > 0) {
      // output data of each row

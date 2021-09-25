@@ -16,7 +16,7 @@ function getCategories() {
             if (this.responseText !== "no data found") {
                 myjson = JSON.parse(this.responseText);
 
-                while (myjson[i].name != null) {
+                while (i<myjson.length ) {
                     html = ' <option value='+myjson[i].id+'>'+myjson[i].name+'</option>'
                     document.getElementById("type_categories").innerHTML += html;
                     i++;

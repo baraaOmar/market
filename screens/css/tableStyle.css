@@ -5,11 +5,14 @@ th{
 tr{
   vertical-align: baseline;
   vertical-align: middle;
+  z-index: 19;
+  vertical-align: baseline !important;
 }
 td{
   
     color :black !important;
     text-align: center;
+    font: -webkit-small-control;    
 }
 #search{
     text-align: end;
@@ -75,6 +78,7 @@ option{
   .dropdown {
     position: relative;
     display: inline-block;
+    
   }
   
   .dropdown-content {
@@ -165,14 +169,14 @@ option{
   .sticky_nav{
     position: sticky !important;
     top: 0 !important;
-    background-color: #2ddab6;
+    background-color: #69a5af87;
     z-index: 1000000000000000;
     margin-bottom: 100px !important;
   }
   tbody:nth-child(1)>tr:nth-child(1){
     position: sticky !important;
     top: 0px !important;
-    background-color: #2ddab6;
+    background-color: #adb5bd1a;
   }
   #myTable > tbody > tr:nth-child(1){
     background-color: transparent !important;

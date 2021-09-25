@@ -19,7 +19,7 @@ function getProviders() {
                 myjson = JSON.parse(this.responseText);
 
 
-                while (myjson[i].name != null) {
+                while (i<myjson.length )  {
                     html = ' <option value=' + myjson[i].id + '>' + myjson[i].name + '</option>';
 
 
@@ -44,6 +44,7 @@ function getGoods() {
 
     var leng_myTable_back_import = document.querySelector("#myTable_back_import > tbody").childElementCount;
     --leng_myTable_back_import;
+    var table = document.getElementById("myTable_back_import");
     var myjson;
     if (window.XMLHttpRequest) {//start ajax code
         ajax = new XMLHttpRequest();
@@ -58,12 +59,12 @@ function getGoods() {
             if (this.responseText !== "no data found") {
                 myjson = JSON.parse(this.responseText);
 
-                var str_2 = ('back_in_' + leng_myTable_back_import);
+                var  rows=   table.rows[0].cells[1].getElementsByClassName('selectpicker')[0];
               
                 while (i < myjson.length - 1) {
                     html = ' <option value=' + myjson[i].id + '>' + myjson[i].name + '</option>';
 
-                    document.getElementById(str_2).innerHTML += html;
+                    rows.innerHTML += (html);
 
                     i++;
 
@@ -71,7 +72,7 @@ function getGoods() {
                 if (i == myjson.length - 1)
                   {  html = ' <option value=' + myjson[i].id + '>' + myjson[i].name + '</option>';
 
-                  document.getElementById(str_2).innerHTML += html;
+                  rows.innerHTML += (html);
 
               
                $(".selectpicker").selectpicker('refresh');}
@@ -84,6 +85,15 @@ function getGoods() {
 
 }
 getGoods();
+function clearBackImport(){
+    var date = document.getElementById("back_import_date");
+
+    var order_id = document.getElementById("back_import_select_type");
+    var table = document.getElementById("myTable_back_import");
+    date.value="";
+    order_id.value="";
+    table.innerHTML="";
+}
 function addBackImport() {
 
     var date = document.getElementById("back_import_date");
@@ -95,12 +105,13 @@ function addBackImport() {
     if (date.value.length == 0) {
         alert("يرجى ملئ جميع الحقول لاضافة عملية الارجاع جديدة")
     } else {
-       
+        var table = document.getElementById("myTable_back_import");
 
-        while (j < leng) {
-            var quantity = document.getElementById("quantity_import_back" + j);
-
-            var id = (document.getElementById("back_in_" + j));
+        for (var i = 0,  row = table.rows[i]; i < table.rows.length ;i++) {
+            var x=i+1;
+            var id = document.querySelector("#myTable_back_import > tbody > tr:nth-child("+x+") > td:nth-child(2) > div > select");//.value;
+            var quantity = document.querySelector("#myTable_back_import > tbody > tr:nth-child("+x+") > td:nth-child(3)  > input");//.value;
+          
             var formdata = new FormData();
             formdata.append("id", id.value);
             formdata.append("order_id", order_id.value);

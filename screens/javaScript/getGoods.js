@@ -18,7 +18,7 @@ function getGoodsForType() {
             if (this.responseText !== "no data found") {
                 myjson = JSON.parse(this.responseText);
                 document.getElementById("goods").innerHTML = ""
-                while (myjson[i].name != null) {
+                while (i<myjson.length )  {
                     html = ' <option value=' + myjson[i].id + '>' + myjson[i].name + '</option>'
                     document.getElementById("goods").innerHTML += html;
                     document.getElementById("myDropdown").innerHTML += ' <option value=' + myjson[i].id + '>' + myjson[i].order_number + '</option>';
@@ -38,7 +38,7 @@ function getGoods() {
     var i = 0;
     var j = 0;
     var html;
-
+var ajax;
     var leng = document.querySelector("#myTable > tbody").childElementCount;
     --leng;
     var table = document.getElementById("myTable");
@@ -48,7 +48,6 @@ function getGoods() {
     } else {
         ajax = new ActiveXObject("Microsoft.XMLHTTP");
     }
-document.getElementsByClassName
     ajax.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             if (this.responseText !== "no data found") {
@@ -56,10 +55,11 @@ document.getElementsByClassName
            var  rows=   table.rows[0].cells[1].getElementsByClassName('selectpicker')[0];
              
            var str = ('in_' + leng);
-              
+          
+    
                 while (i < myjson.length - 1) {
                     html = ' <option value=' + myjson[i].id + '>' + myjson[i].name + '</option>';
-
+                  
                    rows.innerHTML += (html);
 
                     i++;

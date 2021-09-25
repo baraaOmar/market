@@ -69,9 +69,9 @@ function getImportsFilteredTypes() {
         if (this.readyState == 4 && this.status == 200) {
             if (this.responseText !== "no data found") {
                 myjson = JSON.parse(this.responseText);
-                while (myjson[i].name != null) {
+                while (i<myjson.length ) {
                     var min = myjson[i].total_price - myjson[i].payed;
-                    html = ' <tr role="alert"> <td>' + text + '</td> <td>' + myjson[i].name + '</td> <td>' + myjson[i].date + '</td> <td>' + myjson[i].Supplier_name + '</td> <td>' + myjson[i].total_price + '</td>  <td>' + myjson[i].order_number + '</td>   <td>' + "myjson[i].payed "+ '</td> <td>' + min + '</td> <td>                       <div  style="text-align-last: center;           align-self: center;" class="dropdown  form-group col-md-6   right_input">            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">        طريقة الدفع                  </button>     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">               <a onclick="document.getElementById("add_payment_bank").value='+myjson[i].id+'" class="dropdown-item" data-toggle="modal" data-target="#bankModal">تحويل بنك</a>     <a onclick="document.getElementById("add_payment_cheque").value='+myjson[i].id+'" class="dropdown-item" data-toggle="modal" data-target="#chequeModal" >شيكات</a>  <a onclick="document.getElementById("add_payment_cash").value='+myjson[i].id+'" class="dropdown-item" data-toggle="modal" data-target="#cashModal">كاش</a> </div>   </div> </td>  </tr>';
+                    html = ' <tr role="alert"> <td>' + text + '</td> <td>' + myjson[i].name + '</td> <td>' + myjson[i].date + '</td> <td>' + myjson[i].Supplier_name + '</td> <td>' + myjson[i].total_price + '</td>  <td>' + myjson[i].order_number + '</td>    <td>                       <div  style="text-align-last: center;           align-self: center;" class="dropdown  form-group col-md-6   right_input">            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">        طريقة الدفع                  </button>     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">               <a onclick="addPaySetIdOrder(\'add_payment_bank\',\''+myjson[i].id  + '\')" class="dropdown-item" data-toggle="modal" data-target="#bankModal">تحويل بنك</a>     <a onclick="addPaySetIdOrder(\'add_payment_cheque\',\''+myjson[i].id  + '\')" class="dropdown-item" data-toggle="modal" data-target="#chequeModal" >شيكات</a>  <a onclick="addPaySetIdOrder(\'add_payment_cash\',\''+myjson[i].id  + '\')" class="dropdown-item" data-toggle="modal" data-target="#cashModal">كاش</a> </div>   </div> </td>  </tr>';
                        document.getElementById("import_table_category").innerHTML += html;
 
                     i++;
@@ -98,6 +98,8 @@ function imports_between_dates() {
 
     if (date_start.value.length == 0 || date_end.value.length == 0) {
         alert("الرجاء ملئ تاريخ البداية والانتهاء");
+    }else if(date_start.value>  date_end.value){
+        alert("الرجاء ملى تاريخ البداية اقل من النهاية");
     }
     else {
         document.getElementById("import_table_category").innerHTML = "";
@@ -117,10 +119,10 @@ function imports_between_dates() {
                 if (this.responseText !== "no data found") {
                     myjson = JSON.parse(this.responseText);
 
-                    while (myjson[i].name != null) {
+                    while (i<myjson.length ) {
                         var min = myjson[i].total_price - myjson[i].payed;
                         var text = myjson[i].sales_bill_type == 1 ? "فاتورة  مشتريات " : "فاتورة مرتجع مشتريات ";
-                        html = ' <tr role="alert"> <td>' + text + '</td> <td>' + myjson[i].name + '</td> <td>' + myjson[i].date + '</td> <td>' + myjson[i].Supplier_name + '</td> <td>' + myjson[i].total_price + '</td>  <td>' + myjson[i].order_number + '</td>   <td>' + "myjson[i].payed "+ '</td> <td>' + min + '</td> <td>                       <div  style="text-align-last: center;           align-self: center;" class="dropdown  form-group col-md-6   right_input">            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">        طريقة الدفع                  </button>     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">               <a onclick="document.getElementById("add_payment_bank").value='+myjson[i].id+'" class="dropdown-item" data-toggle="modal" data-target="#bankModal">تحويل بنك</a>     <a onclick="document.getElementById("add_payment_cheque").value='+myjson[i].id+'" class="dropdown-item" data-toggle="modal" data-target="#chequeModal" >شيكات</a>  <a onclick="document.getElementById("add_payment_cash").value='+myjson[i].id+'" class="dropdown-item" data-toggle="modal" data-target="#cashModal">كاش</a> </div>   </div> </td>  </tr>';
+                        html = ' <tr role="alert"> <td>' + text + '</td> <td>' + myjson[i].name + '</td> <td>' + myjson[i].date + '</td> <td>' + myjson[i].Supplier_name + '</td> <td>' + myjson[i].total_price + '</td>  <td>' + myjson[i].order_number + '</td>    <td>                       <div  style="text-align-last: center;           align-self: center;" class="dropdown  form-group col-md-6   right_input">            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">        طريقة الدفع                  </button>     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">              <a onclick="addPaySetIdOrder(\'add_payment_bank\',\''+myjson[i].id  + '\')" class="dropdown-item" data-toggle="modal" data-target="#bankModal">تحويل بنك</a>     <a onclick="addPaySetIdOrder(\'add_payment_cheque\',\''+myjson[i].id  + '\')" class="dropdown-item" data-toggle="modal" data-target="#chequeModal" >شيكات</a>  <a onclick="addPaySetIdOrder(\'add_payment_cash\',\''+myjson[i].id  + '\')" class="dropdown-item" data-toggle="modal" data-target="#cashModal">كاش</a> </div>   </div> </td>  </tr>';
                      document.getElementById("import_table_category").innerHTML += html;
 
                         i++;
@@ -139,3 +141,8 @@ function clear_fields() {
     document.getElementById("date_end_imports").value = "";
     getImportsFilteredTypes();
 }
+function addPaySetIdOrder(type,id){
+   document.getElementById(type).value=id;
+   
+
+  }

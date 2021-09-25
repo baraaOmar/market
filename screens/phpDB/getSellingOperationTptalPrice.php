@@ -1,15 +1,8 @@
 <?php
- function  conn(){
-    $dbhost = "localhost";
-    $dbuser = "root";
-    $dbpass = "";
-    $db = "aqsa";
-    $conn = new mysqli($dbhost, $dbuser, $dbpass,$db) or die("Connect failed: %s\n". $conn -> error);
-    return $conn;
-     } 
-    $id= $_REQUEST["id"];
+ require_once "./connection.php";
+    $id= $_POST["id"];
     $sql = "SELECT price_paied FROM `goods` where id=$id";
-     $result = conn()->query($sql);
+     $result = $conn->query($sql);
      $out="";$i=0;
  if ($result->num_rows > 0) {
      // output data of each row

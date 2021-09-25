@@ -1,15 +1,18 @@
+//const { ajax } = require("jquery");
 
-sellingOperation();
-function sellingOperation() {
+//sellingOperation();
+function sellingOperation(id) {
     var i = 0;
     var html;
-    var myjson;
+    var myjson;var ajax;
     document.getElementById("selling_history").innerHTML = "";
     if (window.XMLHttpRequest) {//start ajax code
         ajax = new XMLHttpRequest();
     } else {
         ajax = new ActiveXObject("Microsoft.XMLHTTP");
     }
+    var formData = new FormData();
+    formData.append("id", id);
 
     ajax.onreadystatechange = function () {
 
@@ -17,56 +20,78 @@ function sellingOperation() {
             if (this.responseText !== "no data found") {
                 myjson = JSON.parse(this.responseText);
 
-                while (myjson[i].date != null) {
-                    var n = myjson[i].name + "";
-                    html = ' <tr role="alert">   <td>  <button data-toggle="modal" data-target="#exampleModal_order_back" onclick="clk(\'' + myjson[i].order + '\',\'' + myjson[i].good_id + '\',\'' + myjson[i].name + '\')" style="background-color: yellow;border: none;border-radius: 10%;" type="button" >اضافة كمية راجعة</button> </td>   <td>' + myjson[i].employee + '</td> <td>' + myjson[i].date + '</td> <td>' + myjson[i].dept + '</td>  <td>' + myjson[i].customer + '</td>   <td>' + myjson[i].quantity + '</td> <td>' + myjson[i].price + '</td>  <td>' + myjson[i].profit + '</td>  <td>' + myjson[i].total_payed + '</td> <td>' + myjson[i].total_payed_real + '</td> <td>' + myjson[i].payed_price_each_Good + '</td> <td>' + myjson[i].payed_price + '</td>  <td>'+myjson[i].back_Q+'</td>  <td>' + myjson[i].name + '</td> </tr>';
-                    document.getElementById("selling_history").innerHTML += html;
-                    i++;
+                while (i < myjson.length) {
 
+
+                    $('#selling_history').append('<tr  role="alert">'
+                        + '<td>  <button data-toggle="modal"  data-target="#exampleModal_order_back" onclick="clk(\'' + myjson[i].sell_id + '\',\'' + myjson[i].good_id + '\',\'' + myjson[i].name + '\');setMaxReturnedQ(\'' +(myjson[i].quantity-myjson[i].back_Q) + '\')" style="background-color: yellow;border: none;border-radius: 10%;" type="button" >اضافة كمية راجعة</button> </td> ' +
+                        '<td>' + myjson[i].employee + '</td>' +
+                        ' <td>' + myjson[i].date + '</td>' + '<td>'
+                        + myjson[i].customer + '</td> ' +
+                        ' <td>' + myjson[i].quantity + '</td>' +
+                        ' <td>' + myjson[i].profit + '</td>' +
+                        ' <td>' + myjson[i].total_payed_real + '</td>' +
+                        ' <td>' + myjson[i].payed_price_each_Good + '</td>' +
+                        ' <td>' + myjson[i].back_Q + '</td> ' +
+                        '  <td>' + myjson[i].name + '</td>'
+
+                    )
+                    i++;
                 }
             }
         }
     }
-    ajax.open("GET", "./phpDB/SellingOperation.php?q=", true);
-    ajax.send();
+    ajax.open("POST", "./phpDB/SellingOperation.php?q=", true);
+    ajax.send(formData);
 
 }
 function clk(a, b, c) {
     document.getElementById("good_order_back").value = c;
-  
+
     document.getElementById("add_back_order").value = a;
 }
 function getsellingOperationTotalPrice() {
-    var i = 0;
-    var html;
-    var myjson;
-    var leng = document.querySelector("#myTable > tbody").childElementCount;
-    var j = 0;
-    var total_price_order = document.getElementById("total_price_order");
+
+    var a = 0;
+    var b = 0;
+
     var total_price_order_entered_price = document.getElementById("total_price_order_entered_price");
-    total_price_order.value = 0;
-    total_price_order_entered_price.value = 0;
-    for (var i = 0,  row = table.rows[i]; i < table.rows.length ;i++) {
-        // var x = row.cells[3].childNodes[1].value;
-         var quantity = row.cells[3].childNodes[1];//.value;
-         var price = row.cells[2].childNodes[1];//.value;
-         var id = row.cells[1].childNodes[1];//.value;
-         var formdata = new FormData();
-         formdata.append("id", id.value);
-         formdata.append("order_id", order_id);
-         formdata.append("quantity", quantity.value);
+    var real = document.getElementById("total_price_order");
+    real.value=0;
+    total_price_order_entered_price.value=0;
+    var i = 0
+    for (var i = 0, row = table.rows[i]; i < table.rows.length; i++) {
+        var x = i + 1;
+
+        var quantity = document.querySelector("#myTable > tbody > tr:nth-child(" + x + ") > td:nth-child(3)  > input")
+
+        var price = document.querySelector("#myTable > tbody > tr:nth-child(" + x + ") > td:nth-child(4)  > input")
+        var id = document.querySelector("#myTable > tbody > tr:nth-child(" + x + ") > td:nth-child(2) > div > select");//.value;
+
+        if (quantity.value.length != 0 && price.value.length != 0) {
+            //alert(id.value+" "+price.value+" "+quantity.value);
        
-         formdata.append("price_peace", price.value);
-        if (quentity.length != 0 && id.length != 0) {
-            whil(id, quentity);//&& price.length != 0
-            var a = parseFloat(total_price_order_entered_price.value);
-            total_price_order_entered_price.value = price * quentity + a;
+            a += price.value * quantity.value;
+            total_price_order_entered_price.value = a;
         }
-        j++;
+        if (quantity.value.length != 0)
+          { var v = whil(id, quantity);
+            b += v;
+          
+            real.value = b;
+        }
+
+
+          
+        
+
     }
+
 }
 
-function whil(id, quentity) {
+function whil(id, quantity) {
+
+    var ajax; var res;
     if (window.XMLHttpRequest) {//start ajax code
         ajax = new XMLHttpRequest();
     } else {
@@ -74,7 +99,8 @@ function whil(id, quentity) {
     }
 
 
-
+    var formData = new FormData();
+    formData.append("id", id.value);
     ajax.onreadystatechange = function () {
 
         if (this.readyState == 4 && this.status == 200) {
@@ -82,21 +108,18 @@ function whil(id, quentity) {
             myjson = JSON.parse(this.responseText);
             if (myjson[0].price != null) {
 
-                var a = parseInt(total_price_order.value);;
-                total_price_order.value = myjson[0]["price"] * quentity + a;
-
-
-
+                res = (myjson[0]["price"] * quantity.value);
             }
 
         }
     }
-    ajax.open("GET", "./phpDB/getSellingOperationTptalPrice.php?id=" + id, true);
-    ajax.send();
-
-
+    ajax.open("POST", "./phpDB/getSellingOperationTptalPrice.php", false);
+    ajax.send(formData);
+    return res;
 
 }
+
+
 function sellingOperation_between_dates() {
 
     var i = 0;
@@ -106,14 +129,19 @@ function sellingOperation_between_dates() {
     var date_start = document.getElementById("date_start");
     var date_end = document.getElementById("date_end");
     var myjson;
+    var current_datetime = new Date(date_start.value);
+    var formatted_date_start = current_datetime.getFullYear() + "/" + (current_datetime.getMonth() + 1) + "/" + current_datetime.getDate();
+    current_datetime = new Date(date_end.value);
+    formatted_date_end = current_datetime.getFullYear() + "/" + (current_datetime.getMonth() + 1) + "/" + current_datetime.getDate();
+
 
     if (date_start.value.length == 0 || date_end.value.length == 0) {
         alert("الرجاء ملئ تاريخ البداية والانتهاء");
     }
     else {
         var formdata = new FormData();
-        formdata.append("date_start", date_start.value);
-        formdata.append("date_end", date_end.value);
+        formdata.append("date_start", formatted_date_start);
+        formdata.append("date_end", formatted_date_end);
         if (window.XMLHttpRequest) {//start ajax code
             ajax = new XMLHttpRequest();
         } else {
@@ -122,14 +150,27 @@ function sellingOperation_between_dates() {
 
         ajax.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
+                alert(this.responseText);
+
                 if (this.responseText !== "no data found") {
                     myjson = JSON.parse(this.responseText);
 
-                    while (myjson[i].name != null) {
-                        html = ' <tr role="alert">   <td>  <button data-toggle="modal" data-target="#exampleModal_order_back" onclick="clk(\'' + myjson[i].order + '\',\'' + myjson[i].good_id + '\',\'' + myjson[i].name + '\')" style="background-color: yellow;border: none;border-radius: 10%;" type="button" >اضافة كمية راجعة</button> </td>   <td>' + myjson[i].employee + '</td> <td>' + myjson[i].date + '</td> <td>' + myjson[i].dept + '</td>  <td>' + myjson[i].customer + '</td>   <td>' + myjson[i].quantity + '</td> <td>' + myjson[i].price + '</td>  <td>' + myjson[i].profit + '</td>  <td>' + myjson[i].total_payed + '</td> <td>' + myjson[i].total_payed_real + '</td> <td>' + myjson[i].payed_price_each_Good + '</td> <td>' + myjson[i].payed_price + '</td> <td>'+myjson[i].back_Q+'</td>  <td>' + myjson[i].name + '</td> </tr>';
-                   document.getElementById("selling_history").innerHTML += html;
-                        i++;
+                    while (i < myjson.length) {
 
+                        i++;
+                        $('#selling_history').append('<tr  role="alert">'
+                            + '<td>  <button data-toggle="modal" data-target="#exampleModal_order_back" onclick="clk(\'' + myjson[i].order + '\',\'' + myjson[i].good_id + '\',\'' + myjson[i].name + '\')" style="background-color: yellow;border: none;border-radius: 10%;" type="button" >اضافة كمية راجعة</button> </td> ' +
+                            '<td>' + myjson[i].employee + '</td>' +
+                            ' <td>' + myjson[i].date + '</td>' + '<td>'
+                            + myjson[i].customer + '</td> ' +
+                            ' <td>' + myjson[i].quantity + '</td>' +
+                            ' <td>' + myjson[i].profit + '</td>' +
+                            ' <td>' + myjson[i].total_payed_real + '</td>' +
+                            ' <td>' + myjson[i].payed_price_each_Good + '</td>' +
+                            ' <td>' + myjson[i].back_Q + '</td> ' +
+                            '  <td>' + myjson[i].name + '</td>'
+
+                        )
 
                     }
                 } else {
@@ -142,11 +183,7 @@ function sellingOperation_between_dates() {
 
     }
 }
-function clear_fields() {
-    document.getElementById("date_start").value = "";
-    document.getElementById("date_end").value = "";
-    sellingOperation();
-}
+
 
 function sellingOperationPassedOnCustomerName() {
     var i = 0;
@@ -166,7 +203,7 @@ function sellingOperationPassedOnCustomerName() {
             if (this.responseText !== "no data found") {
                 myjson = JSON.parse(this.responseText);
 
-                if (myjson[i].dept != null) {
+                while (i < myjson.length) {
                     document.getElementById("customer_name_dept").value = myjson[i]["dept"];
                     document.getElementById("customer_name_payed").value = myjson[i]["payed"];
 
@@ -201,15 +238,15 @@ function getCustomer() {
                 myjson = JSON.parse(this.responseText);
 
                 while (i < myjson.length - 1) {
-                    html = ' <option   value=' + myjson[i].id + ' >' + myjson[i].name + ' ' + myjson[i].phone + myjson[i].date +'</option>';
-                    document.getElementById("in_customer_name").innerHTML += html;
-                    
+                    html = ' <option   value=' + myjson[i].id + ' >' + myjson[i].name + ' ' + myjson[i].phone + '</option>';
+                    //  document.getElementById("in_customer_name").innerHTML += html;
+
                     i++;
                 }
                 if (i == myjson.length - 1) {
-                    html = ' <option   value=' + myjson[i].id + ' >' + myjson[i].name + ' ' + myjson[i].phone + myjson[i].date + '</option>';
-                    document.getElementById("in_customer_name").innerHTML += html;
-                    $(".selectpicker").selectpicker('refresh');
+                    html = ' <option   value=' + myjson[i].id + ' >' + myjson[i].name + ' ' + myjson[i].phone + '</option>';
+                    //   document.getElementById("in_customer_name").innerHTML += html;
+                    //    $(".selectpicker").selectpicker('refresh');
 
                 }
 
@@ -241,18 +278,28 @@ function sellingPassedOnCustomerName() {
                 if (this.responseText !== "no data found") {
                     myjson = JSON.parse(this.responseText);
 
-                    while (myjson[i].date != null) {
-                        html = ' <tr role="alert">   <td>  <button data-toggle="modal" data-target="#exampleModal_order_back" onclick="clk(\'' + myjson[i].order + '\',\'' + myjson[i].good_id + '\',\'' + myjson[i].name + '\')" style="background-color: yellow;border: none;border-radius: 10%;" type="button" >اضافة كمية راجعة</button> </td>   <td>' + myjson[i].employee + '</td> <td>' + myjson[i].date + '</td> <td>' + myjson[i].dept + '</td>  <td>' + myjson[i].customer + '</td>   <td>' + myjson[i].quantity + '</td> <td>' + myjson[i].price + '</td>  <td>' + myjson[i].profit + '</td>  <td>' + myjson[i].total_payed + '</td> <td>' + myjson[i].total_payed_real + '</td> <td>' + myjson[i].payed_price_each_Good + '</td> <td>' + myjson[i].payed_price + '</td> <td>'+myjson[i].back_Q+'</td>  <td>' + myjson[i].name + '</td> </tr>';
-                        document.getElementById("selling_history").innerHTML += html;
+                    while (i < myjson.length) {
 
                         i++;
+                        $('#selling_history').append('<tr  role="alert">'
+                            + '<td>  <button data-toggle="modal" data-target="#exampleModal_order_back" onclick="clk(\'' + myjson[i].order + '\',\'' + myjson[i].good_id + '\',\'' + myjson[i].name + '\')" style="background-color: yellow;border: none;border-radius: 10%;" type="button" >اضافة كمية راجعة</button> </td> ' +
+                            '<td>' + myjson[i].employee + '</td>' +
+                            ' <td>' + myjson[i].date + '</td>' + '<td>'
+                            + myjson[i].customer + '</td> ' +
+                            ' <td>' + myjson[i].quantity + '</td>' +
+                            ' <td>' + myjson[i].profit + '</td>' +
+                            ' <td>' + myjson[i].total_payed_real + '</td>' +
+                            ' <td>' + myjson[i].payed_price_each_Good + '</td>' +
+                            ' <td>' + myjson[i].back_Q + '</td> ' +
+                            '  <td>' + myjson[i].name + '</td>'
 
+                        )
 
                     }
                 }
             }
         }
-        ajax.open("POST", "./phpDB/sellingCustomer.php?q=", true);
+        ajax.open("POST", "./phpDB/sellingCustomer.php", true);
         ajax.send(formdata);
     }
 }
@@ -274,7 +321,7 @@ function orderDetails() {
             if (this.responseText !== "no data found") {
                 myjson = JSON.parse(this.responseText);
 
-                while (myjson[i].date != null) {
+                while (i < myjson.length) {
                     // html = ' <tr role="alert"> <td>' + myjson[i].employee + '</td> <td>' + myjson[i].date + '</td> <td>' + myjson[i].payed_price + '</td>  <td>' + myjson[i].customer + '</td>   <td>' + myjson[i].quantity + '</td> <td>' + myjson[i].total_payed + '</td> <td>' + myjson[i].payed_price_each_Good + '</td> <td>' + myjson[i].name + '</td>   </tr>';
                     html = ' <option  value=' + myjson[i].id + ' >' + myjson[i].name + ' ' + myjson[i].phone + '</option>';
 
@@ -290,4 +337,7 @@ function orderDetails() {
     }
     ajax.open("POST", "./phpDB/searchOnOrdersDetails.php?q=", true);
     ajax.send(formdata);
+}
+function setMaxReturnedQ(quantity){
+document.getElementById("quantity_order_back").max=quantity;
 }

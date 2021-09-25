@@ -1,12 +1,5 @@
 <?php
- function  conn(){
-    $dbhost = "localhost";
-    $dbuser = "root";
-    $dbpass = "";
-    $db = "aqsa";
-    $conn = new mysqli($dbhost, $dbuser, $dbpass,$db) or die("Connect failed: %s\n". $conn -> error);
-    return $conn;
-     } 
+require_once "./connection.php";
    $detail=$_POST["detail"];//"برغي";//
    $date=$_POST["date"];//"برغي";//
    $payed=$_POST["payed"];//"2";//
@@ -14,7 +7,7 @@
   
      $sql = "INSERT INTO `expenses`( `employee_id`, `details`, `price_paied`, `price`, `date`) VALUES ('1', '$detail','$payed','$price_total','$date')";
      
-if(conn()->query($sql)===true){
+if($conn->query($sql)===true){
         
  echo("insertDone");}
  else{

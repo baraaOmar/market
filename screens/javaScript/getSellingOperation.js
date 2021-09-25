@@ -4,7 +4,7 @@
   function sellingOperation(){
 var i=0;
     var html;
-    var myjson;
+    var myjson;var ajax;
     var danger_quantity=document.getElementById("danger_quantity").checked;
     document.getElementById("selling_operation_table").innerHTML="";
     if (window.XMLHttpRequest) {//start ajax code
@@ -16,25 +16,36 @@ var i=0;
    
       if (this.readyState == 4 && this.status == 200) {
         if(this.responseText!=="no data found")
-      {  myjson = JSON.parse(this.responseText);
-       
-        while(myjson[i].name!=null) {
-     if(!danger_quantity)
-    { if(myjson[i].quantity<10)
-          html = ' <tr role="alert"> <td>'+myjson[i].quentity_remained+'</td> <td>'+myjson[i].quentity_paied+'</td> <td>'+myjson[i].quantity+'</td> <td>'+myjson[i].price_paied+'</td> <td>'+myjson[i].price+'</td> <td>'+myjson[i].Par_code+'</td> <td>'+myjson[i].name+'</td> <td><img style="width: 20px;" src="../images/danger.png" alt=""></td> <td> <input  type="checkbox" data-toggle="modal" onclick="rapish(\''+myjson[i].id  + '\',\''+myjson[i].name  + '\')"  data-target="#exampleModal_rapish">  </input></td>   </tr>'; 
-     else{
-      html = ' <tr role="alert"> <td>'+myjson[i].quentity_remained+'</td> <td>'+myjson[i].quentity_paied+'</td> <td>'+myjson[i].quantity+'</td> <td>'+myjson[i].price_paied+'</td> <td>'+myjson[i].price+'</td> <td>'+myjson[i].Par_code+'</td> <td>'+myjson[i].name+'</td> <td> <input  type="checkbox" data-toggle="modal" onclick="rapish(\''+myjson[i].id  + '\',\''+myjson[i].name  + '\')"  data-target="#exampleModal_rapish">  </input></td>   </tr>'; 
-     
-     }  }  
-     else{
-      html = ' <tr role="alert"> <td>'+myjson[i].quentity_remained+'</td> <td>'+myjson[i].quentity_paied+'</td> <td>'+myjson[i].quantity+'</td> <td>'+myjson[i].price_paied+'</td> <td>'+myjson[i].price+'</td> <td>'+myjson[i].Par_code+'</td> <td>'+myjson[i].name+'</td> <td><img style="width: 20px;" src="../images/danger.png" alt=""></td> <td> <input  type="checkbox" data-toggle="modal" onclick="rapish(\''+myjson[i].id  + '\',\''+myjson[i].name  + '\')"  data-target="#exampleModal_rapish">  </input></td>   </tr>'; 
-    
-     }
-           document.getElementById("selling_operation_table").innerHTML += html;
+      {  
+        console.log(this.responseText);
+        myjson = JSON.parse(this.responseText);
+        var colorRow="";
+        while (i<myjson.length )  {
+        
+          //IF example .. 
+          if(!danger_quantity)
+         { if(myjson[i].quantity<10){
+            colorRow="red;"
+          }else {
+            colorRow="";
+          }}
+         
+          $('#selling_operation_table').append('<tr style="background-color:'+colorRow+'">'
+          +'<td >'+myjson[i].quentity_remained+'</td>'
+          +'<td>'+myjson[i].quentity_paied+'</td>'
+          +'<td>'+myjson[i].quantity+'</td>'
+          +'<td>'+myjson[i].price_paied+'</td>'
+          +'<td>'+myjson[i].price+'</td>'
+          +'<td>'+myjson[i].Par_code+'</td>'
+          +'<td>'+myjson[i].name+'</td>'
+        //  +'<td><img style="width: 20px;" src="../images/danger.png" alt=""></td>'
+          +'<td> <input  type="checkbox" data-toggle="modal" onclick="rapish(\''+myjson[i].id  + '\',\''+myjson[i].name  + '\')"  data-target="#exampleModal_rapish">  </input></td>'
+          +'</tr>');
       i++;
      
     
-      }}
+      }// while
+    }
       }
     }
     ajax.open("GET", "./phpDB/getSellingOperation.php?q=", true);
@@ -49,7 +60,7 @@ var i=0;
     function addRapish(){
     
 
-      
+      var ajax;
         var quantity = document.getElementById("rapish_quantity");
         var id = document.getElementById("add_rapish");
         var date = document.getElementById("rapish_date");
@@ -95,7 +106,7 @@ var i=0;
     }
   function searchPassedOnName(){
     var searchVal=document.getElementById("good_search_val").value;
-var i=0;
+var i=0;  var colorRow="red;";var ajax;
 var danger_quantity=document.getElementById("danger_quantity").checked;
 document.getElementById("selling_operation_table").innerHTML="";
     var html;
@@ -113,23 +124,32 @@ document.getElementById("selling_operation_table").innerHTML="";
       {
           myjson = JSON.parse(this.responseText);
         document.getElementById("selling_operation_table").innerHTML = "";
-        while(myjson[i].name!=null) {
+        while (i<myjson.length )  {
+        
+          //IF example .. 
           if(!danger_quantity)
-         { if(myjson[i].quantity<10)
-               html = ' <tr role="alert"> <td>'+myjson[i].quentity_remained+'</td> <td>'+myjson[i].quentity_paied+'</td> <td>'+myjson[i].quantity+'</td> <td>'+myjson[i].price_paied+'</td> <td>'+myjson[i].price+'</td> <td>'+myjson[i].Par_code+'</td> <td>'+myjson[i].name+'</td> <td><img style="width: 30px;" src="../images/danger.png" alt=""></td> </tr>';
-          else{
-           html = ' <tr role="alert"> <td>'+myjson[i].quentity_remained+'</td> <td>'+myjson[i].quentity_paied+'</td> <td>'+myjson[i].quantity+'</td> <td>'+myjson[i].price_paied+'</td> <td>'+myjson[i].price+'</td> <td>'+myjson[i].Par_code+'</td> <td>'+myjson[i].name+'</td> </tr>';
-          
-          }  }  
-          else{
-           html = ' <tr role="alert"> <td>'+myjson[i].quentity_remained+'</td> <td>'+myjson[i].quentity_paied+'</td> <td>'+myjson[i].quantity+'</td> <td>'+myjson[i].price_paied+'</td> <td>'+myjson[i].price+'</td> <td>'+myjson[i].Par_code+'</td> <td>'+myjson[i].name+'</td> <td><img style="width: 30px;" src="../images/danger.png" alt=""></td> </tr>';
+         { if(myjson[i].quantity<10){
+            colorRow="red;"
+          }else {
+            colorRow="";
+          }}
          
-          }
-                document.getElementById("selling_operation_table").innerHTML += html;
-           i++;
-          
-         
-           }}
+          $('#selling_operation_table').append('<tr style="background-color:'+colorRow+'">'
+          +'<td >'+myjson[i].quentity_remained+'</td>'
+          +'<td>'+myjson[i].quentity_paied+'</td>'
+          +'<td>'+myjson[i].quantity+'</td>'
+          +'<td>'+myjson[i].price_paied+'</td>'
+          +'<td>'+myjson[i].price+'</td>'
+          +'<td>'+myjson[i].Par_code+'</td>'
+          +'<td>'+myjson[i].name+'</td>'
+        //  +'<td><img style="width: 20px;" src="../images/danger.png" alt=""></td>'
+          +'<td> <input  type="checkbox" data-toggle="modal" onclick="rapish(\''+myjson[i].id  + '\',\''+myjson[i].name  + '\')"  data-target="#exampleModal_rapish">  </input></td>'
+          +'</tr>');
+      i++;
+     
+    
+      }// while
+    }
       }
     }
     ajax.open("POST", "./phpDB/searchOnGoodName.php?search="+searchVal, true);
@@ -154,7 +174,7 @@ document.getElementById("selling_operation_table").innerHTML="";
           if(this.responseText!=="no data found")
         {  myjson = JSON.parse(this.responseText);
           document.getElementById("selling_operation_table").innerHTML = "";
-          while(myjson[i].name!=null) {
+           while (i<myjson.length )  {
             html = ' <option value='+myjson[i].id+'>'+myjson[i].name+'</option>'
             document.getElementById("myDropdown").innerHTML += html;
             i++;
@@ -168,3 +188,4 @@ document.getElementById("selling_operation_table").innerHTML="";
       ajax.send();
       
       }
+      
