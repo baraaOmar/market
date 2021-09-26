@@ -203,7 +203,7 @@ function clearProfitsFields() {
     document.getElementById("expenses_selling_day").value = 0;
     document.getElementById("expenses_debt_selling").value = 0;
     //back
- //   document.getElementById("back_import_total").value = 0;
+   document.getElementById("back_import_total").value = 0;
   /*  document.getElementById("back_import_dept").value = 0;
     document.getElementById("expenses_selling_payed").value = 0;
 */

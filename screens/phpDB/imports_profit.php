@@ -24,7 +24,7 @@ $imports = "SELECT sum( `total_price`) as price FROM `imports` WHERE date BETWEE
          $totalPrice=$row["price"];
        }
 
-      }
+    
      if ($resultbank->num_rows > 0) {
       if($row = $resultbank->fetch_assoc())
        {
@@ -52,7 +52,7 @@ $imports = "SELECT sum( `total_price`) as price FROM `imports` WHERE date BETWEE
 
  
         $myopj["selling_day"]=   $totalPrice;
-        $myopj["debt_selling"]= abs( $totalPrice-$totalPayed);
+        $myopj["debt_selling"]= ( $totalPrice-$totalPayed);
       
      
        $arr[$i]=$myopj; 
@@ -60,5 +60,5 @@ $imports = "SELECT sum( `total_price`) as price FROM `imports` WHERE date BETWEE
        $json=json_encode($arr);
     echo($json);
   
-
+  }
  
