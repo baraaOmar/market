@@ -7,7 +7,7 @@
   
    // echo($date);
    //  $sql = "SELECT sum(`total_price`) as selling_day,payed, sum(`total_price`-`payed`) as debt_selling FROM `imports` WHERE date BETWEEN DATE_FORMAT('$d_start','%Y-%m-%d') and DATE_FORMAT('$d_end','%Y-%m-%d')  and sales_bill_type=2 ";
-   $sql = "SELECT IFNULL(SUM(	imports.total_price),0) as backQuantity FROM `back_import` join imports ON imports.id=back_import.import_id  WHERE imports.sales_bill_type=2 and imports.date BETWEEN DATE_FORMAT('$d_start','%Y-%m-%d') and DATE_FORMAT('$d_end','%Y-%m-%d')";
+   $sql = "SELECT IFNULL(SUM(	imports.total_price),0) as backQuantity FROM  imports  WHERE imports.sales_bill_type=2 and imports.date BETWEEN DATE_FORMAT('$d_start','%Y-%m-%d') and DATE_FORMAT('$d_end','%Y-%m-%d')";
     
      $result = $conn->query($sql);
      $out="";$i=0;

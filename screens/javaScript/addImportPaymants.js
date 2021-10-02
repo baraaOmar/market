@@ -23,7 +23,7 @@ function addImportCashPaymants(import_id) {
 
         ajax.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                if (this.responseText !== "there is aproblem in this process") {
+                if (this.responseText !== "there is aproblem  in this process") {
                     alert("تم اضافة العملية بنجاح");
 
                 }
@@ -77,7 +77,7 @@ function addImportChequePaymants(import_id) {
 
         ajax.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                if (this.responseText !== "there is aproblem in this process") {
+                if (this.responseText !== "there is aproblem  in this process") {
                     alert("تم اضافة العملية بنجاح");
 
                 }
@@ -126,7 +126,7 @@ function addImportBankPaymants(import_id) {
 
         ajax.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                if (this.responseText !== "there is aproblem in this process") {
+                if (this.responseText !== "there is aproblem  in this process") {
                     alert("تم اضافة العملية بنجاح");
 
                 }

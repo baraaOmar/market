@@ -150,7 +150,6 @@ function sellingOperation_between_dates() {
 
         ajax.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                alert(this.responseText);
 
                 if (this.responseText !== "no data found") {
                     myjson = JSON.parse(this.responseText);

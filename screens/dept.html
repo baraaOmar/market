@@ -152,8 +152,86 @@
     </div>
 
   
+    <div id="PaymentDiv" style="display: none;margin-bottom: 60px;" class="container-fluid col-xl-12">
+      <div class="row " style="text-align: -webkit-right;">
+  
+  
+  
+        <div class="container-fluid col-sm-4">
+  
+          <div style="height: 250px;overflow: scroll;">
+            <table class="table">
+  
+              <tr>
+  
+  
+                <th>التاريخ</th>
+                <th>المبلغ المدفوع</th>
+  
+  
+              </tr>
+  
+              <tbody id="chash_history">
+  
+  
+              </tbody>
+            </table>
+          </div>
+        </div>
+  
+        <div class="container-fluid col-sm-6">
+  
+          <div style="height: 250px;;overflow: scroll;">
+            <table class="table">
+  
+              <tr>
+  
+  
+                <th>تاريخ الدفع</th>
+                <th>تاريخ الاستحقاق</th>
+  
+                <th>رقم الشيك</th>
+                <th>قيمة الشيك</th>
+  
+                <th>مدفوع ل</th>
+              </tr>
+  
+              <tbody id="cheque_history">
+  
+  
+              </tbody>
+            </table>
+          </div>
+          <div style="height: 250px;overflow: scroll;">
+            <table class="table">
+  
+              <tr>
+                <th>تاريخ الدفع</th>
+  
+  
+                <th>المبلغ</th>
+                <th>من حساب</th>
+  
+                <th>الي حساب</th>
+              </tr>
+  
+              <tbody id="bank_history">
+  
+  
+              </tbody>
+            </table>
+          </div>
+  
+  
+        </div>
+  
+      </div>
+  
+  
+  
+    </div>
 
-<div style="height: 400px;margin-bottom: 200px;" class="container-fluid col-xl-12">
+<div style="height: 400px;margin-bottom: 200px;overflow-y: scroll;" class="container-fluid col-xl-12">
     
     <table style="width: 100%;" class="table">
 
@@ -187,86 +265,9 @@
       </table>
   
 </div>
-<div id="PaymentDiv" style="display: none;margin-bottom: 60px;" class="container-fluid col-xl-12">
-    <div class="row " style="text-align: -webkit-right;">
 
-
-
-      <div class="container-fluid col-sm-4">
-
-        <div style="height: 250px;overflow: scroll;">
-          <table class="table">
-
-            <tr>
-
-
-              <th>التاريخ</th>
-              <th>المبلغ المدفوع</th>
-
-
-            </tr>
-
-            <tbody id="chash_history">
-
-
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="container-fluid col-sm-6">
-
-        <div style="height: 250px;;overflow: scroll;">
-          <table class="table">
-
-            <tr>
-
-
-              <th>تاريخ الدفع</th>
-              <th>تاريخ الاستحقاق</th>
-
-              <th>رقم الشيك</th>
-              <th>قيمة الشيك</th>
-
-              <th>مدفوع ل</th>
-            </tr>
-
-            <tbody id="cheque_history">
-
-
-            </tbody>
-          </table>
-        </div>
-        <div style="height: 250px;overflow: scroll;">
-          <table class="table">
-
-            <tr>
-              <th>تاريخ الدفع</th>
-
-
-              <th>المبلغ</th>
-              <th>من حساب</th>
-
-              <th>الي حساب</th>
-            </tr>
-
-            <tbody id="bank_history">
-
-
-            </tbody>
-          </table>
-        </div>
-
-
-      </div>
-
-    </div>
-
-
-
-  </div>
   
-  <div style="height: 400px;margin-bottom: 200px;display: none;" class="container-fluid col-xl-12">
+  <div style="height: 500px;margin-bottom: 200px;overflow-y: scroll;" class="container-fluid col-xl-12">
   <table style="width: 100%;" class="table">
 
     <tr>

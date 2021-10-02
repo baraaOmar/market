@@ -80,7 +80,7 @@ function addCashGivenOrderId() {
 
         ajax.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                if (this.responseText !== "there is aproblem in this process") {
+                if (this.responseText !== "there is aproblem  in this process") {
                     alert("تم اضافة العملية بنجاح");
 
                 }
@@ -128,7 +128,7 @@ function addBankGivenOrderId() {
 
         ajax.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                if (this.responseText !== "there is aproblem in this process") {
+                if (this.responseText !== "there is aproblem  in this process") {
                     alert("تم اضافة العملية بنجاح");
 
                 }
@@ -180,7 +180,7 @@ function addChequeGivenOrderId() {
 
         ajax.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                if (this.responseText !== "there is aproblem in this process") {
+                if (this.responseText !== "there is aproblem  in this process") {
                     alert("تم اضافة العملية بنجاح");
 
                 }
@@ -234,7 +234,6 @@ function getOrdersBetween2dates() {
     ajax.onreadystatechange = function () {
 
         if (this.readyState == 4 && this.status == 200) {
-            alert(this.responseText);
             if (this.responseText !== "no data found") {
                 myjson = JSON.parse(this.responseText);
 

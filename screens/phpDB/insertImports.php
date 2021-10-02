@@ -9,7 +9,7 @@
    $date=$_POST["date"];//"2";//
   $type=$_POST["type"];
   $provider=$_POST["name_import"];
-     $sql = "INSERT INTO `imports` ( `Supplier_name`, `order_number`, `employee_id`,  `total_price`, `date`,`sales_bill_type`, `provider_id`) VALUES ('$name', '$number','1','$price','$date','$type','$provider')";
+     $sql = "INSERT INTO `imports` ( `Supplier_name2`, `order_number`, `employee_id`,  `total_price`, `date`,`sales_bill_type`, `provider_id`) VALUES ('$name', '$number','1','$price','$date','$type','$provider')";
      
      $out="";$i=0;
  

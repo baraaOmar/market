@@ -117,8 +117,7 @@ function addBackImport() {
             formdata.append("order_id", order_id.value);
             formdata.append("quantity", quantity.value);
 
-
-            if (id.value.length != 0 && quantity.value.length != 0&& order_id.value.length!=0) {
+            if (id.value.length != 0 && quantity.value.length != 0 && order_id.value.length!=0) {
 
                 if (window.XMLHttpRequest) {//start ajax code
                     ajax = new XMLHttpRequest();
@@ -130,12 +129,10 @@ function addBackImport() {
 
                 ajax.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
-                        if (this.responseText !== "there is aproblem in this process") {
-                            // document.getElementById("text_warning").innerText="done";
+                        if (this.responseText !== "there is aproblem  in this process") {
                             alert("تمت اضافة الطلبية بنجاح")
                         }
                         else {
-                            //  document.getElementById("text_warning").innerText="there is aproblem  in this process";
                             alert("يوجد هنالك مشكلة يرجى المحاولة مرة اخرى");
                         }
                     }

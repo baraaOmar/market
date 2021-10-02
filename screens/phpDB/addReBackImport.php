@@ -8,7 +8,7 @@ require_once "./connection.php";
   
   
       $out="";$i=0;
-      $sql = "INSERT INTO `back_import`( `good_id`, `quentity`, `import_id`) VALUES ('$id','$quantity','$order_id')";
+      $sql = "INSERT INTO `back_import`( `good_id`, `quantity`, `import_id`) VALUES ('$id','$quantity','$order_id')";
 if($conn->query($sql)===true){
       
  echo("insertDone");}

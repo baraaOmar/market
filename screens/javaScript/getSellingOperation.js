@@ -87,7 +87,7 @@ var i=0;
             ajax.onreadystatechange = function () {
     
                 if (this.readyState == 4 && this.status == 200) {
-                    if (this.responseText !== "there is aproblem in this process") {
+                    if (this.responseText !== "there is aproblem  in this process") {
                         // document.getElementById("text_warning").innerText="done";
                         alert("تمت اضافة القطعة بنجاح");
                     }

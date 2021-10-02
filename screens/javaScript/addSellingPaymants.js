@@ -41,7 +41,6 @@ function addSellingCashPaymants(import_id) {
             cheque_number=null;
             alert("تم حفظ دفعة الكاش بنجاح");
         }
-        alert(Bankformdata+"  "+cashFormData.values());
       
       //  cashFormData.append("coinsType", coinsType.value);
     }
@@ -346,9 +345,14 @@ function addSellingOperation() {
 
     var table = document.getElementById("myTable");
    
+var found=false;
+    if ( date.value.length == 0 || total_price.value.length == 0 ) {
+      
+       
+            alert("يرجى ملئ جميع الحقول لاضافة عملية بيع جديدة");
 
-    if ( date.value.length == 0 || total_price.value.length == 0) {
-        alert("يرجى ملئ جميع الحقول لاضافة عملية بيع جديدة")
+    
+     
     } else {
         addOrder();
 
@@ -358,14 +362,14 @@ function addSellingOperation() {
             var price = row.cells[3].childNodes[1];//.value;
             var x=i+1;
             var id = document.querySelector("#myTable > tbody > tr:nth-child("+x+") > td:nth-child(2) > div > select");//.value;
-       
+        {
             var formdata = new FormData();
             formdata.append("id", id.value);
             formdata.append("order_id", order_id);
             formdata.append("quantity", quantity.value);
           
             formdata.append("price_peace", price.value);
-            if (id.value.length != 0 && quantity.value.length != 0 && price.value.length != 0) {
+         
                 if (window.XMLHttpRequest) {//start ajax code
                     ajax = new XMLHttpRequest();
                 } else {
@@ -377,7 +381,7 @@ function addSellingOperation() {
                 ajax.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
 
-                        if (this.responseText !== "there is aproblem in this process") {
+                        if (this.responseText !== "there is aproblem  in this process") {
                             // document.getElementById("text_warning").innerText="done";
                             alert("تمت اضافة الطلبية بنجاح");
                             
@@ -392,7 +396,8 @@ function addSellingOperation() {
                 ajax.open("POST", "./phpDB/addSellingOperation.php", false);
                 ajax.send(formdata);
 
-            }
+            
+        }
             j++;
         }
     }
@@ -426,7 +431,7 @@ function addCashGivenOrder(){
 
         ajax.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                if (this.responseText !== "there is aproblem in this process") {
+                if (this.responseText !== "there is aproblem  in this process") {
                     alert("تم اضافة العملية بنجاح");
 
                 }
@@ -478,7 +483,7 @@ function addBankGivenOrder(){
 
         ajax.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                if (this.responseText !== "there is aproblem in this process") {
+                if (this.responseText !== "there is aproblem  in this process") {
                     alert("تم اضافة العملية بنجاح");
 
                 }
@@ -533,7 +538,7 @@ function addChequeGivenOrder(){
 
         ajax.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                if (this.responseText !== "there is aproblem in this process") {
+                if (this.responseText !== "there is aproblem  in this process") {
                     alert("تم اضافة العملية بنجاح");
 
                 }

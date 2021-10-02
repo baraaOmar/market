@@ -97,9 +97,7 @@ function addImports() {
     if (number.value.length == 0  || price.value.length == 0
         || name_import.value.length == 0 || date.value.length == 0 || imports_select_type.value.length == 0) {
         alert("يرجى ملئ جميع الحقول لاضافة واردات جديدة");
-        
-         
-    }
+        }
 
     else {
 
@@ -113,7 +111,7 @@ function addImports() {
 
         ajax.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                if (this.responseText !== "there is aproblem in this process") {
+                if (this.responseText !== "there is aproblem  in this process") {
                     // document.getElementById("text_warning").innerText="done";
                    // setImportId(this.responseText);
                     alert("تمت اضافة الطلبية بنجاح");
@@ -160,7 +158,7 @@ function addPaymants() {
 
         ajax.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                if (this.responseText !== "there is aproblem in this process") {
+                if (this.responseText !== "there is aproblem  in this process") {
                     // document.getElementById("text_warning").innerText="done";
 alert("تمت اضافة دفعة بنجاح");
 
@@ -205,7 +203,7 @@ function addProviders() {
         ajax.onreadystatechange = function () {
 
             if (this.readyState == 4 && this.status == 200) {
-                if (this.responseText !== "there is aproblem in this process") {
+                if (this.responseText !== "there is aproblem  in this process") {
 
                     alert("تم اضافة المزود بنجاح");
                     getProviders();
@@ -242,7 +240,6 @@ function add_back_order(){
             || quantity.value.length == 0 || sell_id.value.length == 0) {
             alert("الرجاء ملئ جميع الحقول");
         } else {
-    alert(sell_id.value);
             if (window.XMLHttpRequest) {//start ajax code
                 ajax = new XMLHttpRequest();
             } else {
@@ -254,7 +251,7 @@ function add_back_order(){
             ajax.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
                     alert(this.responseText);
-                    if (this.responseText !== "there is aproblem in this process") {
+                    if (this.responseText !== "there is aproblem  in this process") {
                         alert("تم اضافة العملية بنجاح");
     
                     }

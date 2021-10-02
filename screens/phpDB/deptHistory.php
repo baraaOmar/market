@@ -77,9 +77,9 @@ $orders = "SELECT id,`customer_name`, `phone`,  `date`,IFNULL(( `total_payed_rea
             
            
              $arr[$i++]=$myopj; 
-             $json=json_encode($arr);
-             echo($json);
-        }}
+           
+        }  $json=json_encode($arr);
+        echo($json);}
     else{
       echo("no data found");
     }

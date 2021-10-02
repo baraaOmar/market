@@ -70,10 +70,22 @@ function getImportsFilteredTypes() {
             if (this.responseText !== "no data found") {
                 myjson = JSON.parse(this.responseText);
                 while (i<myjson.length ) {
-                    var min = myjson[i].total_price - myjson[i].payed;
-                    html = ' <tr role="alert"> <td>' + text + '</td> <td>' + myjson[i].name + '</td> <td>' + myjson[i].date + '</td> <td>' + myjson[i].Supplier_name + '</td> <td>' + myjson[i].total_price + '</td>  <td>' + myjson[i].order_number + '</td>    <td>                       <div  style="text-align-last: center;           align-self: center;" class="dropdown  form-group col-md-6   right_input">            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">        طريقة الدفع                  </button>     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">               <a onclick="addPaySetIdOrder(\'add_payment_bank\',\''+myjson[i].id  + '\')" class="dropdown-item" data-toggle="modal" data-target="#bankModal">تحويل بنك</a>     <a onclick="addPaySetIdOrder(\'add_payment_cheque\',\''+myjson[i].id  + '\')" class="dropdown-item" data-toggle="modal" data-target="#chequeModal" >شيكات</a>  <a onclick="addPaySetIdOrder(\'add_payment_cash\',\''+myjson[i].id  + '\')" class="dropdown-item" data-toggle="modal" data-target="#cashModal">كاش</a> </div>   </div> </td>  </tr>';
-                       document.getElementById("import_table_category").innerHTML += html;
-
+                    var history = ' <td> <label class="switch"> <input  onclick="showPayDiv(this,' + myjson[i].id + ')" type="checkbox"> <span class="slider round"></span> </label>  </td>';
+                  
+                    html = ' <td>  <div  style="text-align-last: center;           align-self: center;" class="dropdown  form-group col-md-6   right_input">            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">        طريقة الدفع                  </button>     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">               <a onclick="addPaySetIdOrder(\'add_payment_bank\',\''+myjson[i].id  + '\')" class="dropdown-item" data-toggle="modal" data-target="#bankModal">تحويل بنك</a>     <a onclick="addPaySetIdOrder(\'add_payment_cheque\',\''+myjson[i].id  + '\')" class="dropdown-item" data-toggle="modal" data-target="#chequeModal" >شيكات</a>  <a onclick="addPaySetIdOrder(\'add_payment_cash\',\''+myjson[i].id  + '\')" class="dropdown-item" data-toggle="modal" data-target="#cashModal">كاش</a> </div>   </div> </td>  ';
+                     
+                       $('#import_table_category').append('<tr  role="alert">'
+                     
+                       + history
+                       + ' <td>' + text + '</td>'
+                       + '<td>' + myjson[i].name + '</td>'
+                       + '<td>' + myjson[i].date + '</td>'
+                       + '<td>' + myjson[i].Supplier_name + '</td> ' +
+                       ' <td>' + myjson[i].total_price + '</td>' +
+                       ' <td>' + myjson[i].order_number + '</td>' +
+                      
+                       html+'</tr>'
+                   )
                     i++;
 
 
@@ -122,10 +134,23 @@ function imports_between_dates() {
                     while (i<myjson.length ) {
                         var min = myjson[i].total_price - myjson[i].payed;
                         var text = myjson[i].sales_bill_type == 1 ? "فاتورة  مشتريات " : "فاتورة مرتجع مشتريات ";
-                        html = ' <tr role="alert"> <td>' + text + '</td> <td>' + myjson[i].name + '</td> <td>' + myjson[i].date + '</td> <td>' + myjson[i].Supplier_name + '</td> <td>' + myjson[i].total_price + '</td>  <td>' + myjson[i].order_number + '</td>    <td>                       <div  style="text-align-last: center;           align-self: center;" class="dropdown  form-group col-md-6   right_input">            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">        طريقة الدفع                  </button>     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">              <a onclick="addPaySetIdOrder(\'add_payment_bank\',\''+myjson[i].id  + '\')" class="dropdown-item" data-toggle="modal" data-target="#bankModal">تحويل بنك</a>     <a onclick="addPaySetIdOrder(\'add_payment_cheque\',\''+myjson[i].id  + '\')" class="dropdown-item" data-toggle="modal" data-target="#chequeModal" >شيكات</a>  <a onclick="addPaySetIdOrder(\'add_payment_cash\',\''+myjson[i].id  + '\')" class="dropdown-item" data-toggle="modal" data-target="#cashModal">كاش</a> </div>   </div> </td>  </tr>';
-                     document.getElementById("import_table_category").innerHTML += html;
-
-                        i++;
+                        var history = ' <td> <label class="switch"> <input  onclick="showPayDiv(this,' + myjson[i].id + ')" type="checkbox"> <span class="slider round"></span> </label>  </td>';
+                  
+                    html = ' <td>  <div  style="text-align-last: center;           align-self: center;" class="dropdown  form-group col-md-6   right_input">            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">        طريقة الدفع                  </button>     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">               <a onclick="addPaySetIdOrder(\'add_payment_bank\',\''+myjson[i].id  + '\')" class="dropdown-item" data-toggle="modal" data-target="#bankModal">تحويل بنك</a>     <a onclick="addPaySetIdOrder(\'add_payment_cheque\',\''+myjson[i].id  + '\')" class="dropdown-item" data-toggle="modal" data-target="#chequeModal" >شيكات</a>  <a onclick="addPaySetIdOrder(\'add_payment_cash\',\''+myjson[i].id  + '\')" class="dropdown-item" data-toggle="modal" data-target="#cashModal">كاش</a> </div>   </div> </td>  ';
+                     
+                       $('#import_table_category').append('<tr  role="alert">'
+                     
+                       + history
+                       + ' <td>' + text + '</td>'
+                       + '<td>' + myjson[i].name + '</td>'
+                       + '<td>' + myjson[i].date + '</td>'
+                       + '<td>' + myjson[i].Supplier_name + '</td> ' +
+                       ' <td>' + myjson[i].total_price + '</td>' +
+                       ' <td>' + myjson[i].order_number + '</td>' +
+                      
+                       html+'</tr>'
+                   )
+                    i++;
 
 
                     }
